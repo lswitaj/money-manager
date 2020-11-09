@@ -17,6 +17,7 @@ private val moshi = Moshi.Builder()
 interface AlphaVentageService {
     //TODO(change to Deferred) + suspend + coroutines
     @GET("query?function=GLOBAL_QUOTE&symbol=AAPL&apikey=L4VWY02QZAQREPRJ")
+    //suspend fun getQuote(): QuoteProperty
     suspend fun getQuote(): Quote<QuoteProperty>
 }
 

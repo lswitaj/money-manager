@@ -5,8 +5,9 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import java.util.*
 
+////TODO(remove temp toString() method)
 @JsonClass(generateAdapter = true)
-class Quote<QuoteProperty>
+class Quote<QuoteProperty>()
 
 @JsonClass(generateAdapter = true)
 data class QuoteProperty(
