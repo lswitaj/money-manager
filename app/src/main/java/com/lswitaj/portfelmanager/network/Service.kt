@@ -18,7 +18,7 @@ interface AlphaVentageService {
     //TODO(change to Deferred) + suspend + coroutines
     @GET("query?function=GLOBAL_QUOTE&symbol=AAPL&apikey=L4VWY02QZAQREPRJ")
     //suspend fun getQuote(): QuoteProperty
-    suspend fun getQuote(): Quote<QuoteProperty>
+    suspend fun getQuote(): Quote
 }
 
 //TODO(add Moshi Converter Factory and Coroutine adapter)
