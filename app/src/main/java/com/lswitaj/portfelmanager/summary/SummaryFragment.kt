@@ -18,8 +18,6 @@ class SummaryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // TODO(remove this super statement)
-        // return super.onCreateView(inflater, container, savedInstanceState)
         val binding = FragmentSummaryBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel

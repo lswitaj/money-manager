@@ -14,14 +14,16 @@ private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
 
+//TODO(change all queries to Deferred + suspend + coroutines)
 interface AlphaVentageService {
-    //TODO(change to Deferred) + suspend + coroutines
     @GET("query?function=GLOBAL_QUOTE&symbol=AAPL&apikey=L4VWY02QZAQREPRJ")
-    //suspend fun getQuote(): QuoteProperty
     suspend fun getQuote(): Quote
+
+    @GET("query?function=SYMBOL_SEARCH&keywords=opera&apikey=L4VWY02QZAQREPRJ")
+    suspend fun getSearchableItems(): SearchableSymbols
 }
 
-//TODO(add Moshi Converter Factory and Coroutine adapter)
+//TODO(add Coroutine adapter)
 
 object AplhaVantageApi {
     private val retrofit = Retrofit.Builder()
