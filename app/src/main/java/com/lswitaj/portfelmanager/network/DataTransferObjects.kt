@@ -1,9 +1,7 @@
 package com.lswitaj.portfelmanager.network
 
-import androidx.lifecycle.GeneratedAdapter
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import java.util.*
 
 /**
  * DAO for getQuote()

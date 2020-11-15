@@ -5,7 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.lswitaj.portfelmanager.R
 import com.lswitaj.portfelmanager.databinding.FragmentSummaryBinding
 
 class SummaryFragment : Fragment() {
@@ -21,6 +25,15 @@ class SummaryFragment : Fragment() {
         val binding = FragmentSummaryBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+
+        viewModel.navigateToSearch.observe(viewLifecycleOwner,
+            { shouldNavigate ->
+                if (shouldNavigate == true) {
+                    val navController = binding.root.findNavController()
+                    navController.navigate(R.id.action_summaryFragment_to_searchFragment)
+                    viewModel.onNavigatedToSearch()
+                }
+            })
 
         return binding.root
     }
