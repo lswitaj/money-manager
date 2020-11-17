@@ -8,13 +8,13 @@ import com.lswitaj.portfelmanager.network.SymbolMatches
 import kotlinx.coroutines.launch
 
 class SearchViewModel : ViewModel() {
-//    TODO(change _searchableOperaResponse to Int again)
-//    private val _searchableOperaResponse = MutableLiveData<List<SymbolMatches>>()
-//    val reponse: LiveData<List<SymbolMatches>>
-//        get() = _searchableOperaResponse
     private val _searchableOperaResponse = MutableLiveData<List<SymbolMatches>>()
     val searchableOperaResponse: LiveData<List<SymbolMatches>>
         get() = _searchableOperaResponse
+
+    private val _searchPhrase = MutableLiveData<String>()
+    val searchPhrase: LiveData<String>
+        get() = _searchPhrase
 
     init {
         getSearchableForOpera()

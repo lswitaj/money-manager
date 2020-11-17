@@ -1,13 +1,15 @@
 package com.lswitaj.portfelmanager.search
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.util.Log.*
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.lswitaj.portfelmanager.R
+import com.lswitaj.portfelmanager.bindRecyclerView
 import com.lswitaj.portfelmanager.databinding.FragmentSearchBinding
-import com.lswitaj.portfelmanager.network.SymbolMatches
 
 class SearchFragment : Fragment() {
     val adapter = SearchableListAdapter()
@@ -27,6 +29,32 @@ class SearchFragment : Fragment() {
 
         binding.searchList.adapter = adapter
 
+        setHasOptionsMenu(true)
+
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        inflater.inflate(R.menu.menu_item, menu)
+
+        val searchItem = menu.findItem(R.id.action_search)
+        val searchView = searchItem.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    Log.w("query", query)
+                    searchView.clearFocus()
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+
+        })
     }
 }
