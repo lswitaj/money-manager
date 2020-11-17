@@ -19,12 +19,11 @@ interface AlphaVentageService {
     @GET("query?function=GLOBAL_QUOTE&symbol=AAPL&apikey=L4VWY02QZAQREPRJ")
     suspend fun getQuote(): Quote
 
-    @GET("query?function=SYMBOL_SEARCH&keywords=opera&apikey=L4VWY02QZAQREPRJ")
+    @GET("query?function=SYMBOL_SEARCH&keywords=m&apikey=L4VWY02QZAQREPRJ")
     suspend fun getSearchableItems(): SearchableSymbols
 }
 
 //TODO(add Coroutine adapter)
-
 object AplhaVantageApi {
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)

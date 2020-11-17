@@ -12,8 +12,8 @@ class SearchViewModel : ViewModel() {
 //    private val _searchableOperaResponse = MutableLiveData<List<SymbolMatches>>()
 //    val reponse: LiveData<List<SymbolMatches>>
 //        get() = _searchableOperaResponse
-    private val _searchableOperaResponse = MutableLiveData<Int>()
-    val searchableOperaResponse: LiveData<Int>
+    private val _searchableOperaResponse = MutableLiveData<List<SymbolMatches>>()
+    val searchableOperaResponse: LiveData<List<SymbolMatches>>
         get() = _searchableOperaResponse
 
     init {
@@ -25,7 +25,9 @@ class SearchViewModel : ViewModel() {
         viewModelScope.launch {
 //           try {
             var result = AplhaVantageApi.aplhavantage.getSearchableItems()
-            _searchableOperaResponse.value = result.bestMatches.size
+            _searchableOperaResponse.value = result.bestMatches
+            //TODO(to be removed)
+            //_searchableOperaResponse.value = result.bestMatches.size
 //            } catch (e: Exception) {
 //                //TODO(to be considered creating an error quoteProperty object)
 //                // _response.value = e.toString()

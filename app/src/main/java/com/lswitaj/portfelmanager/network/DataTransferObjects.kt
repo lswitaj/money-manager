@@ -1,7 +1,9 @@
 package com.lswitaj.portfelmanager.network
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.android.parcel.Parcelize
 
 /**
  * DAO for getQuote()
@@ -75,6 +77,7 @@ data class SearchableSymbols(
     val bestMatches: List<SymbolMatches>
 )
 
+@Parcelize
 @JsonClass(generateAdapter = true)
 data class SymbolMatches(
     @Json(name = "1. symbol") val symbol: String,
@@ -90,4 +93,4 @@ data class SymbolMatches(
     //TODO(to consider adding some currency enum here)
     @Json(name = "8. currency") val currency: String,
     @Json(name = "9. matchScore") val matchScore: String
-)
+) : Parcelable

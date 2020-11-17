@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.lswitaj.portfelmanager.databinding.FragmentSearchBinding
+import com.lswitaj.portfelmanager.network.SymbolMatches
 
 class SearchFragment : Fragment() {
+    val adapter = SearchableListAdapter()
+
     private val viewModel: SearchViewModel by lazy {
         ViewModelProvider(this).get(SearchViewModel::class.java)
     }
@@ -21,6 +24,8 @@ class SearchFragment : Fragment() {
         val binding = FragmentSearchBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+
+        binding.searchList.adapter = adapter
 
         return binding.root
     }

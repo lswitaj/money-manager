@@ -9,38 +9,57 @@
             type="com.lswitaj.portfelmanager.search.SearchViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <TextView
-            android:id="@+id/searchedSymbolsTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginTop="64dp"
-            android:layout_marginBottom="64dp"
-            android:text="Number of symbols suggestions found for the keyword opera:"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/searchedSymbols"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/search"
+            android:text="TBA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/searchedSymbols"
-            android:layout_width="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:clickable="true"
+            android:id="@+id/search_list"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
-            android:layout_marginBottom="64dp"
-            android:text="@{viewModel.searchableOperaResponse.toString()}"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="5 symbols suggestions found" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_below="@+id/search"
+            android:layout_alignParentStart="true"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:listData="@{viewModel.searchableOperaResponse}"
+            tools:listitem="@layout/list_searchable_item" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/searchedSymbolsTitle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="32dp"-->
+<!--            android:layout_marginEnd="32dp"-->
+<!--            android:layout_marginTop="64dp"-->
+<!--            android:layout_marginBottom="64dp"-->
+<!--            android:text="Number of symbols suggestions found for the keyword opera:"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textSize="16sp"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/searchedSymbols"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/searchedSymbols"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="64dp"-->
+<!--            android:layout_marginBottom="64dp"-->
+<!--            android:text="@{viewModel.searchableOperaResponse.toString()}"-->
+<!--            android:textSize="24sp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            tools:text="5 symbols suggestions found" />-->
+    </RelativeLayout>
 </layout>
