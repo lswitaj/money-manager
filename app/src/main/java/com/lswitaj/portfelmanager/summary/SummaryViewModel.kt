@@ -25,7 +25,8 @@ class SummaryViewModel : ViewModel() {
         lateinit var response: QuoteProperty
         viewModelScope.launch {
 //           try {
-            var result = AplhaVantageApi.aplhavantage.getQuote()
+            //TODO(exchage hardcoded symbol with the parameter)
+            var result = AplhaVantageApi.aplhavantage.getQuote("AAPL")
             _appleQuoteResponse.value = result.quoteProperty
 //            } catch (e: Exception) {
 //                //TODO(to be considered creating an error quoteProperty object)

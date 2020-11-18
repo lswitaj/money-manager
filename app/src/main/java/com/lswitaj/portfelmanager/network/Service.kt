@@ -6,6 +6,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 //TODO(change to not have hardcoded request)
 private const val BASE_URL = "https://www.alphavantage.co/"
@@ -15,12 +16,13 @@ private val moshi = Moshi.Builder()
     .build()
 
 //TODO(change all queries to Deferred + suspend + coroutines)
+//TODO(extract apiKey to the variable - private const val)
 interface AlphaVentageService {
-    @GET("query?function=GLOBAL_QUOTE&symbol=AAPL&apikey=L4VWY02QZAQREPRJ")
-    suspend fun getQuote(): Quote
+    @GET("query?function=GLOBAL_QUOTE&apikey=L4VWY02QZAQREPRJ")
+    suspend fun getQuote(@Query("symbol") symbol: String?): Quote
 
-    @GET("query?function=SYMBOL_SEARCH&keywords=m&apikey=L4VWY02QZAQREPRJ")
-    suspend fun getSearchableItems(): SearchableSymbols
+    @GET("query?function=SYMBOL_SEARCH&apikey=L4VWY02QZAQREPRJ")
+    suspend fun getSearchableItems(@Query("keywords") query: String?): SearchableSymbols
 }
 
 //TODO(add Coroutine adapter)
