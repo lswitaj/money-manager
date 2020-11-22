@@ -15,17 +15,29 @@ class SearchViewModel : ViewModel() {
     val searchPhrase: LiveData<String>
         get() = _searchPhrase
 
+    private val _navigateToSummary = MutableLiveData<SymbolMatches>()
+    val navigateToSummary: LiveData<SymbolMatches>
+        get() = _navigateToSummary
+
     fun searchSymbols(query: String?) {
         lateinit var response: List<SymbolMatches>
         viewModelScope.launch {
 //           try {
             var result = AplhaVantageApi.aplhavantage.getSearchableItems(query)
             _searchableQueryResponse.value = result.bestMatches
-            Log.w("response", result.bestMatches[0].symbol)
 //            } catch (e: Exception) {
 //                //TODO(to be considered creating an error quoteProperty object)
 //                // _response.value = e.toString()
 //            }
         }
+    }
+
+    fun addNewSymbol(symbol: SymbolMatches) {
+        _navigateToSummary.value = symbol
+        Log.w("SYMBOL", symbol.symbol)
+    }
+
+    fun addNewSymbolComplete() {
+        _navigateToSummary.value = null
     }
 }
