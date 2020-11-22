@@ -34,6 +34,7 @@ class SearchViewModel : ViewModel() {
 
     fun addNewSymbol(symbol: SymbolMatches) {
         _navigateToSummary.value = symbol
+        //TODO(logging to be removed)
         Log.w("SYMBOL", symbol.symbol)
     }
 
