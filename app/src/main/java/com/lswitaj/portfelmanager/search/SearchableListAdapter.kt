@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.lswitaj.portfelmanager.databinding.ListSearchableItemBinding
-import com.lswitaj.portfelmanager.network.SearchableSymbols
 import com.lswitaj.portfelmanager.network.SymbolMatches
 import com.lswitaj.portfelmanager.search.SearchableListAdapter.SearchableListViewHolder
 

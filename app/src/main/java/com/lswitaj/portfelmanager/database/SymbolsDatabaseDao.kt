@@ -13,6 +13,7 @@ interface SymbolsDatabaseDao {
     @Insert
     suspend fun addSymbol(symbol: SymbolsOverview)
 
-    @Query("SELECT symbol_name from all_symbols_in_a_wallet ORDER BY symbolId DESC")
+    //    @Query("SELECT symbol_name from all_symbols_in_a_wallet ORDER BY symbolId DESC")
+    @Query("SELECT symbol_name from all_symbols_in_a_wallet")
     fun getAllSymbols(): LiveData<List<String>>
 }

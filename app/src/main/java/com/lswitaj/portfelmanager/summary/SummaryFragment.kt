@@ -8,12 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.lswitaj.portfelmanager.R
+import com.lswitaj.portfelmanager.database.SymbolsDatabase
 import com.lswitaj.portfelmanager.databinding.FragmentSummaryBinding
 
 class SummaryFragment : Fragment() {
-    private val viewModel: SummaryViewModel by lazy {
-        ViewModelProvider(this).get(SummaryViewModel::class.java)
-    }
+    lateinit var viewModel: SummaryViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,8 +21,15 @@ class SummaryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentSummaryBinding.inflate(inflater)
+
+        val application = requireNotNull(this.activity).application
+        val dataSource = SymbolsDatabase.getInstance(application).symbolsDatabaseDao
+        val viewModelFactory = SummaryViewModelFactory(dataSource)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(SummaryViewModel::class.java)
+
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        binding.summaryList.adapter = SummaryListAdapter()
 
         viewModel.navigateToSearch.observe(viewLifecycleOwner,
             { shouldNavigate ->

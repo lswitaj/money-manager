@@ -12,12 +12,12 @@ import kotlinx.coroutines.launch
 class SearchViewModel(
     val database: SymbolsDatabaseDao) : ViewModel() {
     private val _searchableQueryResponse = MutableLiveData<List<SymbolMatches>>()
-    val searchableOperaResponse: LiveData<List<SymbolMatches>>
+    val searchableQueryResponse: LiveData<List<SymbolMatches>>
         get() = _searchableQueryResponse
 
-    private val _searchPhrase = MutableLiveData<String>()
-    val searchPhrase: LiveData<String>
-        get() = _searchPhrase
+//    private val _searchPhrase = MutableLiveData<String>()
+//    val searchPhrase: LiveData<String>
+//        get() = _searchPhrase
 
     private val _navigateToSummary = MutableLiveData<SymbolMatches>()
     val navigateToSummary: LiveData<SymbolMatches>
@@ -40,8 +40,6 @@ class SearchViewModel(
         viewModelScope.launch {
             database.addSymbol(symbol = SymbolsOverview(symbol.symbol))
             _navigateToSummary.value = symbol
-            //TODO(logging to be removed)
-            Log.w("SYMBOL", symbol.symbol)
         }
     }
 

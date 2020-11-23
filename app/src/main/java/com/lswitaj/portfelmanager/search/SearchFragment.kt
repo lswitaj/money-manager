@@ -1,8 +1,6 @@
 package com.lswitaj.portfelmanager.search
 
 import android.os.Bundle
-import android.util.Log
-import android.util.Log.*
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -10,7 +8,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.lswitaj.portfelmanager.R
-import com.lswitaj.portfelmanager.bindRecyclerView
 import com.lswitaj.portfelmanager.database.SymbolsDatabase
 import com.lswitaj.portfelmanager.databinding.FragmentSearchBinding
 

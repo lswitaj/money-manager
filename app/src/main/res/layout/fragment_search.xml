@@ -22,7 +22,7 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:listData="@{viewModel.searchableOperaResponse}"
+            app:listData="@{viewModel.searchableQueryResponse}"
             tools:listitem="@layout/list_searchable_item" />
     </RelativeLayout>
 </layout>
