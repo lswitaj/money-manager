@@ -8,7 +8,11 @@
         android:id="@+id/searchFragment"
         android:name="com.lswitaj.portfelmanager.search.SearchFragment"
         android:label="SearchFragment"
-        tools:layout="@layout/fragment_search"/>
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_summaryFragment"
+            app:destination="@id/summaryFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/summaryFragment"
@@ -18,5 +22,8 @@
         <action
             android:id="@+id/action_summaryFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <argument
+            android:name="selectedSymbol"
+            app:argType="com.lswitaj.portfelmanager.network.SymbolMatches" />
     </fragment>
 </navigation>

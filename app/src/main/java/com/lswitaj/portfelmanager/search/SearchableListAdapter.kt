@@ -10,7 +10,7 @@ import com.lswitaj.portfelmanager.network.SymbolMatches
 import com.lswitaj.portfelmanager.search.SearchableListAdapter.SearchableListViewHolder
 
 // TODO(all those Searchable items should be more meaningful as more searches can be implemented in the app, e.g. for already added to the wallet positions)
-class SearchableListAdapter() : ListAdapter<SymbolMatches, SearchableListViewHolder>(DiffCallback) {
+class SearchableListAdapter(val onClickListener: OnClickListener) : ListAdapter<SymbolMatches, SearchableListViewHolder>(DiffCallback) {
     companion object DiffCallback : DiffUtil.ItemCallback<SymbolMatches>() {
         override fun areItemsTheSame(oldItem: SymbolMatches, newItem: SymbolMatches): Boolean {
             return oldItem === newItem
@@ -25,8 +25,6 @@ class SearchableListAdapter() : ListAdapter<SymbolMatches, SearchableListViewHol
         RecyclerView.ViewHolder(binding.root) {
         fun bind(symbolMatches: SymbolMatches) {
             binding.searchable = symbolMatches
-            // This is important, because it forces the data binding to execute immediately,
-            // which allows the RecyclerView to make the correct view size measurements
             binding.executePendingBindings()
         }
 
@@ -44,6 +42,14 @@ class SearchableListAdapter() : ListAdapter<SymbolMatches, SearchableListViewHol
     }
 
     override fun onBindViewHolder(holder: SearchableListViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val searchableSymbol = getItem(position)
+        holder.itemView.setOnClickListener { 
+            onClickListener.onClick(searchableSymbol)
+        }
+        holder.bind(searchableSymbol)
+    }
+
+    class OnClickListener(val clickListener: (searchableSymbol: SymbolMatches) -> Unit) {
+        fun onClick(searchableSymbol: SymbolMatches) = clickListener(searchableSymbol)
     }
 }
