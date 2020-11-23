@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import com.lswitaj.portfelmanager.R
 import com.lswitaj.portfelmanager.database.SymbolsDatabase
@@ -31,14 +32,13 @@ class SummaryFragment : Fragment() {
         binding.viewModel = viewModel
         binding.summaryList.adapter = SummaryListAdapter()
 
-        viewModel.navigateToSearch.observe(viewLifecycleOwner,
-            { shouldNavigate ->
-                if (shouldNavigate == true) {
-                    val navController = binding.root.findNavController()
-                    navController.navigate(R.id.action_summaryFragment_to_searchFragment)
-                    viewModel.onNavigatedToSearch()
-                }
-            })
+        viewModel.navigateToSearch.observe(viewLifecycleOwner) { shouldNavigate ->
+            if (shouldNavigate) {
+                val navController = binding.root.findNavController()
+                navController.navigate(R.id.action_summaryFragment_to_searchFragment)
+                viewModel.onNavigatedToSearch()
+            }
+        }
 
         return binding.root
     }

@@ -6,6 +6,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Query
 
 //TODO(change to not have hardcoded request)
@@ -15,7 +16,7 @@ private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
 
-//TODO(change all queries to Deferred + suspend + coroutines)
+//TODO(change all queries to Deferred)
 //TODO(extract apiKey to the variable - private const val)
 interface AlphaVentageService {
     @GET("query?function=GLOBAL_QUOTE&apikey=L4VWY02QZAQREPRJ")

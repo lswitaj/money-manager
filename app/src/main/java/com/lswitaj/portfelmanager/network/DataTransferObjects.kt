@@ -5,6 +5,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
 
+//TODO(not used)
 /**
  * DAO for getQuote()
  ** Request example:
@@ -30,6 +31,7 @@ data class Quote(
     @Json(name = "Global Quote") val quoteProperty: QuoteProperty
 )
 
+//TODO(not used)
 @JsonClass(generateAdapter = true)
 data class QuoteProperty(
     @Json(name = "01. symbol") val symbol: String,
