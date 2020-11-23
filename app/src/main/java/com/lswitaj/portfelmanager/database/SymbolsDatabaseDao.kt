@@ -11,9 +11,7 @@ interface SymbolsDatabaseDao {
     //TODO(implement update)
 
     @Insert
-    fun insert(symbol: SymbolsOverview)
-    //TODO(change the insert to be suspended)
-    //suspend fun insert(symbol: String)
+    suspend fun addSymbol(symbol: SymbolsOverview)
 
     @Query("SELECT symbol_name from all_symbols_in_a_wallet ORDER BY symbolId DESC")
     fun getAllSymbols(): LiveData<List<String>>

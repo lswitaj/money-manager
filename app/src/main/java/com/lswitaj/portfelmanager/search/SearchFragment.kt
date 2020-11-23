@@ -11,12 +11,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.lswitaj.portfelmanager.R
 import com.lswitaj.portfelmanager.bindRecyclerView
+import com.lswitaj.portfelmanager.database.SymbolsDatabase
 import com.lswitaj.portfelmanager.databinding.FragmentSearchBinding
 
 class SearchFragment : Fragment() {
-    private val viewModel: SearchViewModel by lazy {
-        ViewModelProvider(this).get(SearchViewModel::class.java)
-    }
+    lateinit var viewModel: SearchViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,9 +23,14 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentSearchBinding.inflate(inflater)
+
+        val application = requireNotNull(this.activity).application
+        val dataSource = SymbolsDatabase.getInstance(application).symbolsDatabaseDao
+        val viewModelFactory = SearchViewModelFactory(dataSource)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(SearchViewModel::class.java)
+
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-
         binding.searchList.adapter = SearchableListAdapter(SearchableListAdapter.OnClickListener {
             viewModel.addNewSymbol(it)
         })

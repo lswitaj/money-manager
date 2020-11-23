@@ -2,11 +2,15 @@ package com.lswitaj.portfelmanager.search
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.lswitaj.portfelmanager.database.SymbolsDatabase
+import com.lswitaj.portfelmanager.database.SymbolsDatabaseDao
+import com.lswitaj.portfelmanager.database.SymbolsOverview
 import com.lswitaj.portfelmanager.network.AplhaVantageApi
 import com.lswitaj.portfelmanager.network.SymbolMatches
 import kotlinx.coroutines.launch
 
-class SearchViewModel : ViewModel() {
+class SearchViewModel(
+    val database: SymbolsDatabaseDao) : ViewModel() {
     private val _searchableQueryResponse = MutableLiveData<List<SymbolMatches>>()
     val searchableOperaResponse: LiveData<List<SymbolMatches>>
         get() = _searchableQueryResponse
@@ -33,9 +37,12 @@ class SearchViewModel : ViewModel() {
     }
 
     fun addNewSymbol(symbol: SymbolMatches) {
-        _navigateToSummary.value = symbol
-        //TODO(logging to be removed)
-        Log.w("SYMBOL", symbol.symbol)
+        viewModelScope.launch {
+            database.addSymbol(symbol = SymbolsOverview(symbol.symbol))
+            _navigateToSummary.value = symbol
+            //TODO(logging to be removed)
+            Log.w("SYMBOL", symbol.symbol)
+        }
     }
 
     fun addNewSymbolComplete() {
