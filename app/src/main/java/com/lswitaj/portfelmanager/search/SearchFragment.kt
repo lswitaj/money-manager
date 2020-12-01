@@ -39,6 +39,8 @@ class SearchFragment : Fragment() {
             }
         })
 
+        viewModel.getAllSymbols()
+
         setHasOptionsMenu(true)
         return binding.root
     }
@@ -51,16 +53,16 @@ class SearchFragment : Fragment() {
         val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem.actionView as SearchView
 
+        //TODO(to wait until all operations, requests and db inserts, are done)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query != null) {
-                    viewModel.searchSymbols(query)
-                    searchView.clearFocus()
-                }
+            override fun onQueryTextSubmit(query: String): Boolean {
+                viewModel.searchSymbols(query)
+                searchView.clearFocus()
                 return true
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
+            override fun onQueryTextChange(query: String): Boolean {
+                viewModel.searchSymbols(query)
                 return true
             }
 

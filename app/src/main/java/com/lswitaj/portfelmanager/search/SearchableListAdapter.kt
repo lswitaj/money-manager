@@ -6,24 +6,24 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.lswitaj.portfelmanager.databinding.ListSearchableItemBinding
-import com.lswitaj.portfelmanager.network.SymbolMatches
+import com.lswitaj.portfelmanager.network.Symbol
 import com.lswitaj.portfelmanager.search.SearchableListAdapter.SearchableListViewHolder
 
 // TODO(all those Searchable items should be more meaningful as more searches can be implemented in the app, e.g. for already added to the wallet positions)
-class SearchableListAdapter(val onClickListener: OnClickListener) : ListAdapter<SymbolMatches, SearchableListViewHolder>(DiffCallback) {
-    companion object DiffCallback : DiffUtil.ItemCallback<SymbolMatches>() {
-        override fun areItemsTheSame(oldItem: SymbolMatches, newItem: SymbolMatches): Boolean {
+class SearchableListAdapter(val onClickListener: OnClickListener) : ListAdapter<Symbol, SearchableListViewHolder>(DiffCallback) {
+    companion object DiffCallback : DiffUtil.ItemCallback<Symbol>() {
+        override fun areItemsTheSame(oldItem: Symbol, newItem: Symbol): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: SymbolMatches, newItem: SymbolMatches): Boolean {
+        override fun areContentsTheSame(oldItem: Symbol, newItem: Symbol): Boolean {
             return oldItem == newItem
         }
     }
 
     class SearchableListViewHolder(private var binding: ListSearchableItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(symbolMatches: SymbolMatches) {
+        fun bind(symbolMatches: Symbol) {
             binding.searchable = symbolMatches
             binding.executePendingBindings()
         }
@@ -49,7 +49,7 @@ class SearchableListAdapter(val onClickListener: OnClickListener) : ListAdapter<
         holder.bind(searchableSymbol)
     }
 
-    class OnClickListener(val clickListener: (searchableSymbol: SymbolMatches) -> Unit) {
-        fun onClick(searchableSymbol: SymbolMatches) = clickListener(searchableSymbol)
+    class OnClickListener(val clickListener: (searchableSymbol: Symbol) -> Unit) {
+        fun onClick(searchableSymbol: Symbol) = clickListener(searchableSymbol)
     }
 }
