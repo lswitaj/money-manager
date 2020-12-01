@@ -1,5 +1,6 @@
 package com.lswitaj.portfelmanager.search
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,6 +27,12 @@ class SearchViewModel(
         viewModelScope.launch {
 //           try {
             val result = FinnhubApi.finnhub.getSymbolsFromExchange()
+
+            //TODO(to be removed)
+            //TODO(proper error handling to be added)
+            val candles = FinnhubApi.finnhub.getCandles("AAPL")
+            Log.w("candle", candles.closePrice[0].toString())
+
             allSymbols = result
             _searchableQueryResponse.value = allSymbols
 //            } catch (e: Exception) {
