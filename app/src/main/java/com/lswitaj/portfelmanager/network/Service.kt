@@ -22,6 +22,9 @@ interface FinnhubService {
     //TODO(accept country parameter)
 //    @GET("stock/symbol?")
 //    suspend fun getSymbolsFromExchange(@Query("exchange") exchange: String?): Quote
+
+    @GET("stock/candle?resolution=D&from=1605543327&to=1605629727&token=bv2tbon48v6ru7sfdof0")
+    suspend fun getCandles(@Query("symbol") symbol: String?): Candles
 }
 
 object FinnhubApi {
