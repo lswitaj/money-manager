@@ -1,30 +1,31 @@
 package com.lswitaj.portfelmanager.search
 
-import android.util.Log
-import androidx.lifecycle.*
-import com.lswitaj.portfelmanager.database.SymbolsDatabase
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.lswitaj.portfelmanager.database.SymbolsDatabaseDao
 import com.lswitaj.portfelmanager.database.SymbolsOverview
-import com.lswitaj.portfelmanager.network.AplhaVantageApi
-import com.lswitaj.portfelmanager.network.SymbolMatches
+import com.lswitaj.portfelmanager.network.FinnhubApi
+import com.lswitaj.portfelmanager.network.Symbol
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
     val database: SymbolsDatabaseDao) : ViewModel() {
-    private val _searchableQueryResponse = MutableLiveData<List<SymbolMatches>>()
-    val searchableQueryResponse: LiveData<List<SymbolMatches>>
+    private val _searchableQueryResponse = MutableLiveData<List<Symbol>>()
+    val searchableQueryResponse: LiveData<List<Symbol>>
         get() = _searchableQueryResponse
 
-    private val _navigateToSummary = MutableLiveData<SymbolMatches>()
-    val navigateToSummary: LiveData<SymbolMatches>
+    private val _navigateToSummary = MutableLiveData<Symbol>()
+    val navigateToSummary: LiveData<Symbol>
         get() = _navigateToSummary
 
     fun searchSymbols(query: String?) {
-        lateinit var response: List<SymbolMatches>
+        lateinit var response: List<Symbol>
         viewModelScope.launch {
 //           try {
-            val result = AplhaVantageApi.aplhavantage.getSearchableItems(query)
-            _searchableQueryResponse.value = result.bestMatches
+            val result = FinnhubApi.finnhub.getSymbolsFromExchange()
+            _searchableQueryResponse.value = result
 //            } catch (e: Exception) {
 //                //TODO(to be considered creating an error quoteProperty object)
 //                // _response.value = e.toString()
@@ -32,7 +33,7 @@ class SearchViewModel(
         }
     }
 
-    fun addNewSymbol(symbol: SymbolMatches) {
+    fun addNewSymbol(symbol: Symbol) {
         viewModelScope.launch {
             database.addSymbol(symbol = SymbolsOverview(symbol.symbol))
             _navigateToSummary.value = symbol
@@ -41,5 +42,6 @@ class SearchViewModel(
 
     fun addNewSymbolComplete() {
         _navigateToSummary.value = null
+        //TODO(scroll down when adding a new symbol to see it)
     }
 }

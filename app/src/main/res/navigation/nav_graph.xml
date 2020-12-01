@@ -24,6 +24,6 @@
             app:destination="@id/searchFragment" />
         <argument
             android:name="selectedSymbol"
-            app:argType="com.lswitaj.portfelmanager.network.SymbolMatches" />
+            app:argType="com.lswitaj.portfelmanager.network.Symbol" />
     </fragment>
 </navigation>
