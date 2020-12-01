@@ -12,6 +12,8 @@ import kotlinx.coroutines.launch
 
 class SearchViewModel(
     val database: SymbolsDatabaseDao) : ViewModel() {
+    private lateinit var allSymbols: List<Symbol>
+
     private val _searchableQueryResponse = MutableLiveData<List<Symbol>>()
     val searchableQueryResponse: LiveData<List<Symbol>>
         get() = _searchableQueryResponse
@@ -20,12 +22,12 @@ class SearchViewModel(
     val navigateToSummary: LiveData<Symbol>
         get() = _navigateToSummary
 
-    fun searchSymbols(query: String?) {
-        lateinit var response: List<Symbol>
+    fun getAllSymbols() {
         viewModelScope.launch {
 //           try {
             val result = FinnhubApi.finnhub.getSymbolsFromExchange()
-            _searchableQueryResponse.value = result
+            allSymbols = result
+            _searchableQueryResponse.value = allSymbols
 //            } catch (e: Exception) {
 //                //TODO(to be considered creating an error quoteProperty object)
 //                // _response.value = e.toString()
@@ -33,9 +35,13 @@ class SearchViewModel(
         }
     }
 
+    fun searchSymbols(query: String) {
+        _searchableQueryResponse.value = allSymbols.filter { it.description.contains(query, true)}
+    }
+
     fun addNewSymbol(symbol: Symbol) {
         viewModelScope.launch {
-            database.addSymbol(symbol = SymbolsOverview(symbol.symbol))
+            database.addSymbol(SymbolsOverview(symbol.symbol))
             _navigateToSummary.value = symbol
         }
     }
