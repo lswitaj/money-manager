@@ -11,6 +11,8 @@ import com.lswitaj.portfelmanager.network.FinnhubApi
 import com.lswitaj.portfelmanager.network.Symbol
 import kotlinx.coroutines.launch
 
+const val ONE_MONTH_SECONDS: Long = 31*60*60*24 //86400 - one unixtimestamp day
+
 class SearchViewModel(
     val database: SymbolsDatabaseDao) : ViewModel() {
     private lateinit var allSymbols: List<Symbol>
@@ -28,10 +30,18 @@ class SearchViewModel(
 //           try {
             val result = FinnhubApi.finnhub.getSymbolsFromExchange()
 
+
+
             //TODO(to be removed)
             //TODO(proper error handling to be added)
-            val candles = FinnhubApi.finnhub.getCandles("AAPL")
-            Log.w("candle", candles.closePrice[0].toString())
+            val candles = FinnhubApi.finnhub.getCandles(
+                "AAPL",
+                getYesterdayTimestamp(),
+                getCurrentTimestamp()
+            )
+            Log.w("candle", candles.closePrice.last().toString())
+
+
 
             allSymbols = result
             _searchableQueryResponse.value = allSymbols
@@ -56,5 +66,13 @@ class SearchViewModel(
     fun addNewSymbolComplete() {
         _navigateToSummary.value = null
         //TODO(scroll down when adding a new symbol to see it)
+    }
+
+    fun getCurrentTimestamp(): String {
+        return (System.currentTimeMillis()/1000).toString()
+    }
+
+    fun getYesterdayTimestamp(): String {
+        return (System.currentTimeMillis()/1000 - ONE_MONTH_SECONDS).toString()
     }
 }
