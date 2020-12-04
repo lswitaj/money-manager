@@ -5,24 +5,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.lswitaj.portfelmanager.database.SymbolsOverview
 import com.lswitaj.portfelmanager.databinding.ListSummaryItemBinding
 import com.lswitaj.portfelmanager.summary.SummaryListAdapter.SummaryListViewHolder
 
-class SummaryListAdapter() : ListAdapter<String, SummaryListViewHolder>(DiffCallback) {
-    companion object DiffCallback : DiffUtil.ItemCallback<String>() {
-        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+class SummaryListAdapter() : ListAdapter<SymbolsOverview, SummaryListViewHolder>(DiffCallback) {
+    companion object DiffCallback : DiffUtil.ItemCallback<SymbolsOverview>() {
+        override fun areItemsTheSame(oldItem: SymbolsOverview, newItem: SymbolsOverview): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
-            return oldItem == newItem
+        override fun areContentsTheSame(oldItem: SymbolsOverview, newItem: SymbolsOverview): Boolean {
+            return oldItem.symbolId == newItem.symbolId
         }
     }
 
     class SummaryListViewHolder(private var binding: ListSummaryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(symbol: String) {
-            binding.symbol = symbol
+        fun bind(symbolOverview: SymbolsOverview) {
+            binding.symbolOverview = symbolOverview
             binding.executePendingBindings()
         }
 
