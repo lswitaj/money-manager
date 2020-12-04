@@ -45,7 +45,6 @@ class SearchViewModel(
     }
 
     fun addNewSymbol(symbol: Symbol) {
-        val svm = SummaryViewModel(database)
         viewModelScope.launch {
             database.addSymbol(SymbolsOverview(symbol.symbol))
             _navigateToSummary.value = symbol

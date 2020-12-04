@@ -46,7 +46,8 @@ class SummaryViewModel(
     //getting positions and updating their prices
     suspend fun updatePrices() {
         withContext(Dispatchers.IO) {
-            val allPositions = database.getAllSymbolsNames()
+            // new positions will be updated first thanks to reversing the list
+            val allPositions = database.getAllSymbolsNames().reversed()
             allPositions.forEach { symbolName ->
                 database.updatePrice(symbolName, getLastClosePrice(symbolName))
             }
