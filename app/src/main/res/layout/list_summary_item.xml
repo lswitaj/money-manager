@@ -6,8 +6,8 @@
 
     <data>
         <variable
-            name="symbol"
-            type="String" />
+            name="symbolOverview"
+            type="com.lswitaj.portfelmanager.database.SymbolsOverview" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,15 +19,30 @@
             android:id="@+id/name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:text="@{symbol}"
-            android:textSize="20sp"
             android:padding="16dp"
-            android:textAlignment="center"
+            android:text="@{symbolOverview.symbolName}"
+            android:textAlignment="viewStart"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="OPR"
-            android:textStyle="bold"/>
+            tools:text="OPR" />
+
+        <!-- TODO(to add a nice price formatter) -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/price"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            android:text="@{symbolOverview.lastClosePrice}"
+            android:textAlignment="viewEnd"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="194.36" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

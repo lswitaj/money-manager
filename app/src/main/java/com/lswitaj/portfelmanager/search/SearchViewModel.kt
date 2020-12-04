@@ -9,12 +9,13 @@ import com.lswitaj.portfelmanager.database.SymbolsDatabaseDao
 import com.lswitaj.portfelmanager.database.SymbolsOverview
 import com.lswitaj.portfelmanager.network.FinnhubApi
 import com.lswitaj.portfelmanager.network.Symbol
+import com.lswitaj.portfelmanager.summary.SummaryViewModel
 import kotlinx.coroutines.launch
-
-const val ONE_MONTH_SECONDS: Long = 31*60*60*24 //86400 - one unixtimestamp day
 
 class SearchViewModel(
     val database: SymbolsDatabaseDao) : ViewModel() {
+
+    //TODO(to have all symbols stored in the app maybe in some background job)
     private lateinit var allSymbols: List<Symbol>
 
     private val _searchableQueryResponse = MutableLiveData<List<Symbol>>()
@@ -29,21 +30,8 @@ class SearchViewModel(
         viewModelScope.launch {
 //           try {
             val result = FinnhubApi.finnhub.getSymbolsFromExchange()
-
-
-
-            //TODO(to be removed)
-            //TODO(proper error handling to be added)
-            val candles = FinnhubApi.finnhub.getCandles(
-                "AAPL",
-                getYesterdayTimestamp(),
-                getCurrentTimestamp()
-            )
-            Log.w("candle", candles.closePrice.last().toString())
-
-
-
-            allSymbols = result
+            //symbols without description won't be shown
+            allSymbols = result.filter { it.description.isNotEmpty()}
             _searchableQueryResponse.value = allSymbols
 //            } catch (e: Exception) {
 //                //TODO(to be considered creating an error quoteProperty object)
@@ -53,10 +41,11 @@ class SearchViewModel(
     }
 
     fun searchSymbols(query: String) {
-        _searchableQueryResponse.value = allSymbols.filter { it.description.contains(query, true)}
+        _searchableQueryResponse.value = allSymbols.filter{ it.description.contains(query, true) }
     }
 
     fun addNewSymbol(symbol: Symbol) {
+        val svm = SummaryViewModel(database)
         viewModelScope.launch {
             database.addSymbol(SymbolsOverview(symbol.symbol))
             _navigateToSummary.value = symbol
@@ -66,13 +55,5 @@ class SearchViewModel(
     fun addNewSymbolComplete() {
         _navigateToSummary.value = null
         //TODO(scroll down when adding a new symbol to see it)
-    }
-
-    fun getCurrentTimestamp(): String {
-        return (System.currentTimeMillis()/1000).toString()
-    }
-
-    fun getYesterdayTimestamp(): String {
-        return (System.currentTimeMillis()/1000 - ONE_MONTH_SECONDS).toString()
     }
 }
