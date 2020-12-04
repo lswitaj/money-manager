@@ -5,7 +5,6 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.Query
 
 private const val BASE_URL_FINNHUB = "https://finnhub.io/api/v1/"
@@ -22,6 +21,13 @@ interface FinnhubService {
     //TODO(accept country parameter)
 //    @GET("stock/symbol?")
 //    suspend fun getSymbolsFromExchange(@Query("exchange") exchange: String?): Quote
+
+    @GET("stock/candle?resolution=D&token=bv2tbon48v6ru7sfdof0")
+    suspend fun getCandles(
+        @Query("symbol") symbol: String?,
+        @Query("from") timestampFrom: String?,
+        @Query("to") timestampTo: String?
+    ): Candles
 }
 
 object FinnhubApi {
