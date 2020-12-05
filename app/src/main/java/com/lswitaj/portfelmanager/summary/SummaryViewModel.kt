@@ -1,5 +1,6 @@
 package com.lswitaj.portfelmanager.summary
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -43,11 +44,14 @@ class SummaryViewModel(
 
     //TODO(to add a price before adding a new symbol to the DB)
     //TODO(proper error handling to be added as it's the network fun)
+    //TODO(timeout handling when the symbol doesn't have candles anymore and also maybe removing
+    // it before adding to the summary lists)
     //getting positions and updating their prices
     suspend fun updatePrices() {
         withContext(Dispatchers.IO) {
             // new positions will be updated first thanks to reversing the list
             val allPositions = database.getAllSymbolsNames().reversed()
+
             allPositions.forEach { symbolName ->
                 database.updatePrice(symbolName, getLastClosePrice(symbolName))
             }
