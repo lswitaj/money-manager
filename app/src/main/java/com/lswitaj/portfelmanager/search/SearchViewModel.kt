@@ -11,9 +11,11 @@ import com.lswitaj.portfelmanager.network.FinnhubApi
 import com.lswitaj.portfelmanager.network.Symbol
 import com.lswitaj.portfelmanager.summary.SummaryViewModel
 import kotlinx.coroutines.launch
+import java.lang.Character.isLetter
 
 class SearchViewModel(
-    val database: SymbolsDatabaseDao) : ViewModel() {
+    val database: SymbolsDatabaseDao
+) : ViewModel() {
 
     //TODO(to have all symbols stored in the app maybe in some background job)
     private lateinit var allSymbols: List<Symbol>
@@ -30,8 +32,11 @@ class SearchViewModel(
         viewModelScope.launch {
 //           try {
             val result = FinnhubApi.finnhub.getSymbolsFromExchange()
-            //symbols without description won't be shown
-            allSymbols = result.filter { it.description.isNotEmpty()}
+            //symbols without description or with non-letters won't be shown
+            allSymbols = result
+                .filter { it.description.isNotEmpty() }
+                .filter { !it.symbol.contains(regex= Regex("""=+|\^+|#+|-+""")) }
+
             _searchableQueryResponse.value = allSymbols
 //            } catch (e: Exception) {
 //                //TODO(to be considered creating an error quoteProperty object)
@@ -41,7 +46,7 @@ class SearchViewModel(
     }
 
     fun searchSymbols(query: String) {
-        _searchableQueryResponse.value = allSymbols.filter{ it.description.contains(query, true) }
+        _searchableQueryResponse.value = allSymbols.filter { it.description.contains(query, true) }
     }
 
     fun addNewSymbol(symbol: Symbol) {
