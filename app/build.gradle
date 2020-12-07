@@ -77,6 +77,5 @@ dependencies {
     implementation "androidx.room:room-ktx:$version_room"
 
     // Back4app - Parse cloud-hosted BaaS
-    // implementation "com.github.parse-community.Parse-SDK-Android:parse:1.18.5"
     implementation "com.parse:parse-android:1.17.3"
 }
