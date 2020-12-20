@@ -15,8 +15,6 @@ class MainActivity : AppCompatActivity() {
                 .server(getString(R.string.back4app_server_url))
                 .build()
         )
-        //TODO(temporary - to log first event in Back4app console)
-        ParseInstallation.getCurrentInstallation().saveInBackground();
         setContentView(R.layout.activity_main)
     }
 }
