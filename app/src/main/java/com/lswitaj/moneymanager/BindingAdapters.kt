@@ -1,11 +1,11 @@
-package com.lswitaj.portfelmanager
+package com.lswitaj.moneymanager
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.lswitaj.portfelmanager.database.SymbolsOverview
-import com.lswitaj.portfelmanager.network.Symbol
-import com.lswitaj.portfelmanager.search.SearchableListAdapter
-import com.lswitaj.portfelmanager.summary.SummaryListAdapter
+import com.lswitaj.moneymanager.database.SymbolsOverview
+import com.lswitaj.moneymanager.network.Symbol
+import com.lswitaj.moneymanager.search.SearchableListAdapter
+import com.lswitaj.moneymanager.summary.SummaryListAdapter
 
 @BindingAdapter("listData")
 fun bindSearchableList(recyclerView: RecyclerView, data: List<Symbol>?) {

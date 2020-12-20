@@ -6,7 +6,7 @@
     app:startDestination="@id/summaryFragment">
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.lswitaj.portfelmanager.search.SearchFragment"
+        android:name="com.lswitaj.moneymanager.search.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/fragment_search">
         <action
@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/summaryFragment"
-        android:name="com.lswitaj.portfelmanager.summary.SummaryFragment"
+        android:name="com.lswitaj.moneymanager.summary.SummaryFragment"
         android:label="SummaryFragment"
         tools:layout="@layout/fragment_summary">
         <action

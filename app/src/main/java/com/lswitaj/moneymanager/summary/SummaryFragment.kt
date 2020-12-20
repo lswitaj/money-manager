@@ -1,4 +1,4 @@
-package com.lswitaj.portfelmanager.summary
+package com.lswitaj.moneymanager.summary
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,10 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
-import androidx.navigation.findNavController
-import com.lswitaj.portfelmanager.R
-import com.lswitaj.portfelmanager.database.SymbolsDatabase
-import com.lswitaj.portfelmanager.databinding.FragmentSummaryBinding
+import com.lswitaj.moneymanager.R
+import com.lswitaj.moneymanager.database.SymbolsDatabase
+import com.lswitaj.moneymanager.databinding.FragmentSummaryBinding
 
 class SummaryFragment : Fragment() {
     lateinit var viewModel: SummaryViewModel

@@ -1,9 +1,8 @@
-package com.lswitaj.portfelmanager
+package com.lswitaj.moneymanager
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.parse.Parse
-import com.parse.ParseInstallation
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

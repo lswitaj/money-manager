@@ -1,4 +1,4 @@
-package com.lswitaj.portfelmanager
+package com.lswitaj.moneymanager
 
 const val ONE_MONTH_SECONDS: Long = 31*60*60*24 //one unix-timestamp month
 

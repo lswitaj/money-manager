@@ -1,8 +1,8 @@
-package com.lswitaj.portfelmanager.search
+package com.lswitaj.moneymanager.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.lswitaj.portfelmanager.database.SymbolsDatabaseDao
+import com.lswitaj.moneymanager.database.SymbolsDatabaseDao
 
 class SearchViewModelFactory(
     private val dataSource: SymbolsDatabaseDao) : ViewModelProvider.Factory {

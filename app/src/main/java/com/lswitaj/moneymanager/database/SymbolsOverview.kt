@@ -1,4 +1,4 @@
-package com.lswitaj.portfelmanager.database
+package com.lswitaj.moneymanager.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
