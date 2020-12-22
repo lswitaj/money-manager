@@ -58,6 +58,7 @@ class SummaryViewModel(
         allSymbols = database.getAllSymbols()
     }
 
+    //TODO(error handling when the price it's null)
     suspend fun getLastClosePrice(symbolName: String): Double = FinnhubApi.finnhub.getCandles(
             symbolName,
             getYesterdayTimestamp(),

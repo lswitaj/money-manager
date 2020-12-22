@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/summaryFragment">
+    app:startDestination="@id/logInFragment">
+
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.lswitaj.moneymanager.search.SearchFragment"
@@ -22,8 +23,15 @@
         <action
             android:id="@+id/action_summaryFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
-        <argument
-            android:name="selectedSymbol"
-            app:argType="com.lswitaj.portfelmanager.network.Symbol" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="com.lswitaj.moneymanager.login.LogInFragment"
+        android:label="LogInFragment"
+        tools:layout="@layout/fragment_log_in">
+        <action
+            android:id="@+id/action_logInFragment_to_summaryFragment"
+            app:destination="@id/summaryFragment" />
     </fragment>
 </navigation>

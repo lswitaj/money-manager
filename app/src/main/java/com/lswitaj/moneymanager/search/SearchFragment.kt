@@ -18,7 +18,7 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = FragmentSearchBinding.inflate(inflater)
 
         val application = requireNotNull(this.activity).application
@@ -32,9 +32,9 @@ class SearchFragment : Fragment() {
             viewModel.addNewSymbol(it)
         })
 
-        viewModel.navigateToSummary.observe(viewLifecycleOwner, Observer {
+        viewModel.navigateToSummary.observe(viewLifecycleOwner, {
             if (null != it) {
-                this.findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToSummaryFragment(it))
+                this.findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToSummaryFragment())
                 viewModel.addNewSymbolComplete()
             }
         })

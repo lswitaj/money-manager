@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Portfel Manager</string>
+    <string name="app_name">Money Manager</string>
 
     <!-- Back4app & Parse service -->
     <string name="back4app_server_url">https://parseapi.back4app.com/</string>
