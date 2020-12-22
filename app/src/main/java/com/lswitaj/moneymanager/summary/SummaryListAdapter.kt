@@ -1,13 +1,13 @@
-package com.lswitaj.portfelmanager.summary
+package com.lswitaj.moneymanager.summary
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.lswitaj.portfelmanager.database.SymbolsOverview
-import com.lswitaj.portfelmanager.databinding.ListSummaryItemBinding
-import com.lswitaj.portfelmanager.summary.SummaryListAdapter.SummaryListViewHolder
+import com.lswitaj.moneymanager.database.SymbolsOverview
+import com.lswitaj.moneymanager.databinding.ListSummaryItemBinding
+import com.lswitaj.moneymanager.summary.SummaryListAdapter.SummaryListViewHolder
 
 class SummaryListAdapter() : ListAdapter<SymbolsOverview, SummaryListViewHolder>(DiffCallback) {
     companion object DiffCallback : DiffUtil.ItemCallback<SymbolsOverview>() {

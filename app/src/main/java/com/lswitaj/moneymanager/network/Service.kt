@@ -1,4 +1,4 @@
-package com.lswitaj.portfelmanager.network
+package com.lswitaj.moneymanager.network
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

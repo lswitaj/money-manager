@@ -1,4 +1,4 @@
-package com.lswitaj.portfelmanager
+package com.lswitaj.moneymanager
 
 import org.junit.Test
 

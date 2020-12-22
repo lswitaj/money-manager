@@ -17,7 +17,7 @@ android {
     buildToolsVersion "30.0.1"
 
     defaultConfig {
-        applicationId "com.lswitaj.portfelmanager"
+        applicationId "com.lswitaj.moneymanager"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1

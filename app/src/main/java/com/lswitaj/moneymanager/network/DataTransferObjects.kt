@@ -1,4 +1,4 @@
-package com.lswitaj.portfelmanager.network
+package com.lswitaj.moneymanager.network
 
 import android.os.Parcelable
 import com.squareup.moshi.Json
