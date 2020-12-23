@@ -36,6 +36,14 @@ class LogInFragment : Fragment() {
             }
         }
 
+        viewModel.navigateToSignUp.observe(viewLifecycleOwner) { shouldNavigate ->
+            if (shouldNavigate) {
+                val navController = binding.root.findNavController()
+                navController.navigate(R.id.action_logInFragment_to_signUpFragment)
+                viewModel.onNavigatedToSignUp()
+            }
+        }
+
         viewModel.errorMessage.observe(viewLifecycleOwner) {
             showSnackbar(view, it)
         }

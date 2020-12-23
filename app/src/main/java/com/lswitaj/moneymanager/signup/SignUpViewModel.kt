@@ -13,6 +13,10 @@ class SignUpViewModel() : ViewModel() {
     val password = MutableLiveData("")
     val email = MutableLiveData("")
 
+    private val _navigateToLogIn = MutableLiveData<Boolean>()
+    val navigateToLogIn: LiveData<Boolean>
+        get() = _navigateToLogIn
+
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String>
         get() = _errorMessage
@@ -31,14 +35,14 @@ class SignUpViewModel() : ViewModel() {
         user.signUpInBackground { e ->
             if (e == null) {
                 _errorMessage.value = "User registered"
-                //_navigateToLogIn.value = true
+                _navigateToLogIn.value = true
             } else {
                 _errorMessage.value = parseErrorFormatter(e)
             }
         }
     }
 
-//    fun onNavigatedToLogIn() {
-//        _navigateToLogIn.value = false
-//    }
+    fun onNavigatedToLogIn() {
+        _navigateToLogIn.value = false
+    }
 }

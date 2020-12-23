@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import com.lswitaj.moneymanager.R
 import com.lswitaj.moneymanager.databinding.FragmentSignUpBinding
 import com.lswitaj.moneymanager.showSnackbar
 
@@ -26,6 +28,14 @@ class SignUpFragment : Fragment() {
 
         viewModel.errorMessage.observe(viewLifecycleOwner) {
             showSnackbar(view, it)
+        }
+
+        viewModel.navigateToLogIn.observe(viewLifecycleOwner) { shouldNavigate ->
+            if (shouldNavigate) {
+                val navController = binding.root.findNavController()
+                navController.navigate(R.id.action_signUpFragment_to_logInFragment)
+                viewModel.onNavigatedToLogIn()
+            }
         }
 
         return binding.root

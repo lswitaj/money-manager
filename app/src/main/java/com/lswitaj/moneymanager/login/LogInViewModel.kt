@@ -13,6 +13,10 @@ class LogInViewModel() : ViewModel() {
     val navigateToSummary: LiveData<Boolean>
         get() = _navigateToSummary
 
+    private val _navigateToSignUp = MutableLiveData<Boolean>()
+    val navigateToSignUp: LiveData<Boolean>
+        get() = _navigateToSignUp
+
     // Back4app API doesn't accept null username and password
     val username = MutableLiveData("")
     val password = MutableLiveData("")
@@ -39,5 +43,13 @@ class LogInViewModel() : ViewModel() {
 
     fun onNavigatedToSummary() {
         _navigateToSummary.value = false
+    }
+
+    fun onSignUpButtonClicked() {
+        _navigateToSignUp.value = true
+    }
+
+    fun onNavigatedToSignUp() {
+        _navigateToSignUp.value = false
     }
 }
