@@ -6,12 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import com.google.android.material.snackbar.Snackbar
-import com.lswitaj.moneymanager.R
-import com.lswitaj.moneymanager.databinding.FragmentLogInBinding
 import com.lswitaj.moneymanager.databinding.FragmentSignUpBinding
-import com.lswitaj.moneymanager.hideKeyboard
+import com.lswitaj.moneymanager.showSnackbar
 
 class SignUpFragment : Fragment() {
     lateinit var viewModel: SignUpViewModel
@@ -29,15 +25,9 @@ class SignUpFragment : Fragment() {
         binding.viewModel = viewModel
 
         viewModel.errorMessage.observe(viewLifecycleOwner) {
-            showSnackbar(it)
+            showSnackbar(view, it)
         }
 
         return binding.root
-    }
-
-    //TODO(extract showSnackbar function to Utils)
-    private fun showSnackbar(message: String) {
-        view?.hideKeyboard()
-        view?.let { Snackbar.make(it, message, Snackbar.LENGTH_SHORT).show() }
     }
 }

@@ -34,3 +34,8 @@ fun usernameFormatter(username: String?): String? {
 
 //TODO(to add email modifier)
 //TODO(password validation - without spaces, 8 chars, 1 big, 1 small, 1 number)
+
+fun showSnackbar(view: View?, message: String) {
+    view?.hideKeyboard()
+    view?.let { Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show() }
+}
