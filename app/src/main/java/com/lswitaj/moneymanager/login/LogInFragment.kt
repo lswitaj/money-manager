@@ -1,15 +1,16 @@
 package com.lswitaj.moneymanager.login
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.lswitaj.moneymanager.databinding.FragmentLogInBinding
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.lswitaj.moneymanager.R
-import com.lswitaj.moneymanager.search.SearchFragmentDirections
+import com.lswitaj.moneymanager.databinding.FragmentLogInBinding
+import com.lswitaj.moneymanager.hideKeyboard
 
 class LogInFragment : Fragment() {
     //TODO(check if the viewModel should be lateinit or initialized in onCreateView())
@@ -36,6 +37,15 @@ class LogInFragment : Fragment() {
             }
         }
 
+        viewModel.errorMessage.observe(viewLifecycleOwner) {
+            showSnackbar(it)
+        }
+
         return binding.root
+    }
+
+    private fun showSnackbar(message: String) {
+        view?.hideKeyboard()
+        view?.let { Snackbar.make(it, message, Snackbar.LENGTH_SHORT).show() }
     }
 }
