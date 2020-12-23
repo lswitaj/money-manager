@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.lswitaj.moneymanager.summary.SummaryViewModel" />
@@ -74,7 +73,6 @@
         </androidx.core.widget.NestedScrollView>
 
         <!--TODO(extract marigins to the separate file)-->
-        <!--TODO(extract strings)-->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -82,7 +80,7 @@
             android:layout_margin="16dp"
             android:onClick="@{() -> viewModel.onFabClicked()}"
             app:srcCompat="@drawable/ic_baseline_add_24"
-            android:contentDescription="Add a new position" />
+            android:contentDescription="@string/add_a_new_position" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

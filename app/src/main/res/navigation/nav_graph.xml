@@ -6,6 +6,29 @@
     app:startDestination="@id/logInFragment">
 
     <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.lswitaj.moneymanager.signup.SignUpFragment"
+        android:label="SignUpFragment"
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/action_signUpFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="com.lswitaj.moneymanager.login.LogInFragment"
+        android:label="LogInFragment"
+        tools:layout="@layout/fragment_log_in">
+        <action
+            android:id="@+id/action_logInFragment_to_summaryFragment"
+            app:destination="@id/summaryFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+
+    <fragment
         android:id="@+id/searchFragment"
         android:name="com.lswitaj.moneymanager.search.SearchFragment"
         android:label="SearchFragment"
@@ -23,15 +46,5 @@
         <action
             android:id="@+id/action_summaryFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/logInFragment"
-        android:name="com.lswitaj.moneymanager.login.LogInFragment"
-        android:label="LogInFragment"
-        tools:layout="@layout/fragment_log_in">
-        <action
-            android:id="@+id/action_logInFragment_to_summaryFragment"
-            app:destination="@id/summaryFragment" />
     </fragment>
 </navigation>
