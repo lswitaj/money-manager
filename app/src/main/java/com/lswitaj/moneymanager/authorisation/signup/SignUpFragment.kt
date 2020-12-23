@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.lswitaj.moneymanager.R
 import com.lswitaj.moneymanager.databinding.FragmentSignUpBinding
-import com.lswitaj.moneymanager.showSnackbar
+import com.lswitaj.moneymanager.utils.showSnackbar
 
 class SignUpFragment : Fragment() {
     lateinit var viewModel: SignUpViewModel
@@ -30,10 +30,10 @@ class SignUpFragment : Fragment() {
             showSnackbar(view, it)
         }
 
-        viewModel.navigateToLogIn.observe(viewLifecycleOwner) { shouldNavigate ->
+        viewModel.navigateToSummary.observe(viewLifecycleOwner) { shouldNavigate ->
             if (shouldNavigate) {
                 val navController = binding.root.findNavController()
-                navController.navigate(R.id.action_signUpFragment_to_logInFragment)
+                navController.navigate(R.id.action_signUpFragment_to_summaryFragment)
                 viewModel.onNavigatedToLogIn()
             }
         }

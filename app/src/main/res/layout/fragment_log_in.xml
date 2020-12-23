@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.lswitaj.moneymanager.authorisation.login.LogInViewModel" />
@@ -14,57 +15,62 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/username_input"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="128dp"
-                android:ems="10"
-                android:hint="@string/username"
-                android:inputType="textPersonName"
-                android:text="@={viewModel.username}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/password_input"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:ems="10"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:text="@={viewModel.password}"
-                app:layout_constraintEnd_toEndOf="@id/username_input"
-                app:layout_constraintStart_toStartOf="@id/username_input"
-                app:layout_constraintTop_toBottomOf="@+id/username_input" />
+                <EditText
+                    android:id="@+id/username_input"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="64dp"
+                    android:ems="10"
+                    android:hint="@string/username"
+                    android:inputType="textPersonName"
+                    android:text="@={viewModel.username}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/log_in_button"
-                style="?attr/materialButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                android:onClick="@{() -> viewModel.onLogInButtonClicked()}"
-                android:text="@string/log_in"
-                app:layout_constraintEnd_toEndOf="@id/username_input"
-                app:layout_constraintTop_toBottomOf="@+id/password_input" />
+                <EditText
+                    android:id="@+id/password_input"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:ems="10"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:text="@={viewModel.password}"
+                    app:layout_constraintEnd_toEndOf="@id/username_input"
+                    app:layout_constraintStart_toStartOf="@id/username_input"
+                    app:layout_constraintTop_toBottomOf="@+id/username_input" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/sign_up_button"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                android:onClick="@{() -> viewModel.onSignUpButtonClicked()}"
-                android:text="@string/sign_up"
-                app:layout_constraintStart_toStartOf="@id/username_input"
-                app:layout_constraintTop_toBottomOf="@+id/password_input" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/log_in_button"
+                    style="?attr/materialButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="36dp"
+                    android:onClick="@{() -> viewModel.onLogInButtonClicked()}"
+                    android:text="@string/log_in"
+                    app:layout_constraintEnd_toEndOf="@id/username_input"
+                    app:layout_constraintTop_toBottomOf="@+id/password_input" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/sign_up_button"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="36dp"
+                    android:onClick="@{() -> viewModel.onSignUpButtonClicked()}"
+                    android:text="@string/sign_up"
+                    app:layout_constraintStart_toStartOf="@id/username_input"
+                    app:layout_constraintTop_toBottomOf="@+id/password_input" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

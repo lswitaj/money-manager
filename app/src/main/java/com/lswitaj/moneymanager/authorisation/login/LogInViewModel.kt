@@ -3,8 +3,8 @@ package com.lswitaj.moneymanager.authorisation.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.lswitaj.moneymanager.parseErrorFormatter
-import com.lswitaj.moneymanager.usernameFormatter
+import com.lswitaj.moneymanager.utils.parseErrorFormatter
+import com.lswitaj.moneymanager.utils.usernameFormatter
 import com.parse.ParseUser
 
 class LogInViewModel() : ViewModel() {

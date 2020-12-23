@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lswitaj.moneymanager.data.database.SymbolsDatabaseDao
 import com.lswitaj.moneymanager.data.database.SymbolsOverview
-import com.lswitaj.moneymanager.getCurrentTimestamp
-import com.lswitaj.moneymanager.getYesterdayTimestamp
+import com.lswitaj.moneymanager.utils.getCurrentTimestamp
+import com.lswitaj.moneymanager.utils.getYesterdayTimestamp
 import com.lswitaj.moneymanager.data.network.FinnhubApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

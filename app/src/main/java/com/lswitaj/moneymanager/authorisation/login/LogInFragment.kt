@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.lswitaj.moneymanager.R
 import com.lswitaj.moneymanager.databinding.FragmentLogInBinding
-import com.lswitaj.moneymanager.showSnackbar
+import com.lswitaj.moneymanager.utils.showSnackbar
 
 class LogInFragment : Fragment() {
     //TODO(check if the viewModel should be lateinit or initialized in onCreateView())
