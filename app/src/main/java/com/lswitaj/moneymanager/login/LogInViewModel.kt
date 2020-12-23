@@ -1,10 +1,10 @@
 package com.lswitaj.moneymanager.login
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.lswitaj.moneymanager.usernameModifier
+import com.lswitaj.moneymanager.parseErrorFormatter
+import com.lswitaj.moneymanager.usernameFormatter
 import com.parse.ParseUser
 
 class LogInViewModel() : ViewModel() {
@@ -17,19 +17,22 @@ class LogInViewModel() : ViewModel() {
     val username = MutableLiveData("")
     val password = MutableLiveData("")
 
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String>
+        get() = _errorMessage
+
     fun onLogInButtonClicked() {
-        //TODO(to add snackbar for exceptions from API)
         //TODO(login to be lowercased for both login and sing up)
-        val username = usernameModifier(username.value)
+        val username = usernameFormatter(username.value)
         val password = password.value
 
         ParseUser.logInInBackground(username, password) { user, e ->
             if (user != null) {
                 //TODO(to display email/username in sidebar)
-                Log.w("response", user.username + " " + user.email)
+                _errorMessage.value = user.username + " " + user.email
                 _navigateToSummary.value = true
             } else {
-                Log.w("response", e.toString())
+                _errorMessage.value = parseErrorFormatter(e)
             }
         }
     }
