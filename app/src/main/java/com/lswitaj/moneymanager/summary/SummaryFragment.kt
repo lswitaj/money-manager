@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import com.lswitaj.moneymanager.R
-import com.lswitaj.moneymanager.database.SymbolsDatabase
+import com.lswitaj.moneymanager.data.database.SymbolsDatabase
 import com.lswitaj.moneymanager.databinding.FragmentSummaryBinding
 
 class SummaryFragment : Fragment() {

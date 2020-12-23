@@ -7,7 +7,7 @@
     <data>
         <variable
             name="searchable"
-            type="com.lswitaj.moneymanager.network.Symbol" />
+            type="com.lswitaj.moneymanager.data.network.Symbol" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

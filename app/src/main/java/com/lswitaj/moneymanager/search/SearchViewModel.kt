@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lswitaj.moneymanager.database.SymbolsDatabaseDao
-import com.lswitaj.moneymanager.database.SymbolsOverview
-import com.lswitaj.moneymanager.network.FinnhubApi
-import com.lswitaj.moneymanager.network.Symbol
+import com.lswitaj.moneymanager.data.database.SymbolsDatabaseDao
+import com.lswitaj.moneymanager.data.database.SymbolsOverview
+import com.lswitaj.moneymanager.data.network.FinnhubApi
+import com.lswitaj.moneymanager.data.network.Symbol
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
