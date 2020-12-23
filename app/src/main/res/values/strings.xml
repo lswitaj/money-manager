@@ -1,8 +1,21 @@
 <resources>
     <string name="app_name">Money Manager</string>
 
-    <!-- Back4app & Parse service -->
+<!-- Back4app & Parse service -->
     <string name="back4app_server_url">https://parseapi.back4app.com/</string>
     <string name="back4app_app_id">RXb5TqfFxjO9QueIF0Mz5Lw8MfAys6JghDmqGfH3</string>
     <string name="back4app_client_key">ceXYMxtoFOq5yLc2M2aGxOieNDz7uTCb5TK4bS9G</string>
+
+<!-- Menu -->
+    <string name="search">Search</string>
+
+<!-- Sign up and Log in -->
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="email_address">E-mail address</string>
+
+<!-- Summary -->
+    <string name="add_a_new_position">Add a new position</string>
 </resources>

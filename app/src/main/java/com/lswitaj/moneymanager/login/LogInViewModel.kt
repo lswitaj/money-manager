@@ -22,13 +22,13 @@ class LogInViewModel() : ViewModel() {
         get() = _errorMessage
 
     fun onLogInButtonClicked() {
-        //TODO(login to be lowercased for both login and sing up)
         val username = usernameFormatter(username.value)
         val password = password.value
 
         ParseUser.logInInBackground(username, password) { user, e ->
             if (user != null) {
                 //TODO(to display email/username in sidebar)
+                //TODO(remove the line below if possible)
                 _errorMessage.value = user.username + " " + user.email
                 _navigateToSummary.value = true
             } else {
