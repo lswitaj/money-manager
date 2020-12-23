@@ -1,13 +1,13 @@
-package com.lswitaj.portfelmanager.search
+package com.lswitaj.moneymanager.search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.lswitaj.portfelmanager.databinding.ListSearchableItemBinding
-import com.lswitaj.portfelmanager.network.Symbol
-import com.lswitaj.portfelmanager.search.SearchableListAdapter.SearchableListViewHolder
+import com.lswitaj.moneymanager.databinding.ListSearchableItemBinding
+import com.lswitaj.moneymanager.network.Symbol
+import com.lswitaj.moneymanager.search.SearchableListAdapter.SearchableListViewHolder
 
 // TODO(all those Searchable items should be more meaningful as more searches can be implemented in the app, e.g. for already added to the wallet positions)
 class SearchableListAdapter(val onClickListener: OnClickListener) : ListAdapter<Symbol, SearchableListViewHolder>(DiffCallback) {

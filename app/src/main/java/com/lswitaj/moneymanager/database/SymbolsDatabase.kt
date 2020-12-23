@@ -1,4 +1,4 @@
-package com.lswitaj.portfelmanager.database
+package com.lswitaj.moneymanager.database
 
 import android.content.Context
 import androidx.room.Database

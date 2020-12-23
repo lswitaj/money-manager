@@ -7,12 +7,13 @@
 
         <variable
             name="viewModel"
-            type="com.lswitaj.portfelmanager.summary.SummaryViewModel" />
+            type="com.lswitaj.moneymanager.summary.SummaryViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScrollView"
@@ -21,8 +22,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".MainActivity">
+                android:layout_height="match_parent">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/summary_list"

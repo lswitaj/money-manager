@@ -1,4 +1,4 @@
-package com.lswitaj.portfelmanager.search
+package com.lswitaj.moneymanager.search
 
 import android.os.Bundle
 import android.view.*
@@ -7,9 +7,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.lswitaj.portfelmanager.R
-import com.lswitaj.portfelmanager.database.SymbolsDatabase
-import com.lswitaj.portfelmanager.databinding.FragmentSearchBinding
+import com.lswitaj.moneymanager.R
+import com.lswitaj.moneymanager.database.SymbolsDatabase
+import com.lswitaj.moneymanager.databinding.FragmentSearchBinding
 
 class SearchFragment : Fragment() {
     lateinit var viewModel: SearchViewModel
@@ -18,7 +18,7 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = FragmentSearchBinding.inflate(inflater)
 
         val application = requireNotNull(this.activity).application
@@ -32,9 +32,9 @@ class SearchFragment : Fragment() {
             viewModel.addNewSymbol(it)
         })
 
-        viewModel.navigateToSummary.observe(viewLifecycleOwner, Observer {
+        viewModel.navigateToSummary.observe(viewLifecycleOwner, {
             if (null != it) {
-                this.findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToSummaryFragment(it))
+                this.findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToSummaryFragment())
                 viewModel.addNewSymbolComplete()
             }
         })

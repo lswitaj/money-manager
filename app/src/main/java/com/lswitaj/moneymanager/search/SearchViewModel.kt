@@ -1,17 +1,14 @@
-package com.lswitaj.portfelmanager.search
+package com.lswitaj.moneymanager.search
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lswitaj.portfelmanager.database.SymbolsDatabaseDao
-import com.lswitaj.portfelmanager.database.SymbolsOverview
-import com.lswitaj.portfelmanager.network.FinnhubApi
-import com.lswitaj.portfelmanager.network.Symbol
-import com.lswitaj.portfelmanager.summary.SummaryViewModel
+import com.lswitaj.moneymanager.database.SymbolsDatabaseDao
+import com.lswitaj.moneymanager.database.SymbolsOverview
+import com.lswitaj.moneymanager.network.FinnhubApi
+import com.lswitaj.moneymanager.network.Symbol
 import kotlinx.coroutines.launch
-import java.lang.Character.isLetter
 
 class SearchViewModel(
     val database: SymbolsDatabaseDao

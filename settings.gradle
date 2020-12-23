@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "Portfel Manager"
+rootProject.name = "Money Manager"
