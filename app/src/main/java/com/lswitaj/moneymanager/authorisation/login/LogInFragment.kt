@@ -1,4 +1,4 @@
-package com.lswitaj.moneymanager.login
+package com.lswitaj.moneymanager.authorisation.login
 
 import android.os.Bundle
 import android.view.LayoutInflater

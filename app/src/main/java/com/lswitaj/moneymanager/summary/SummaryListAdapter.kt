@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.lswitaj.moneymanager.database.SymbolsOverview
+import com.lswitaj.moneymanager.data.database.SymbolsOverview
 import com.lswitaj.moneymanager.databinding.ListSummaryItemBinding
 import com.lswitaj.moneymanager.summary.SummaryListAdapter.SummaryListViewHolder
 

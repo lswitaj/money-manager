@@ -4,11 +4,10 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.lswitaj.moneymanager.R
-import com.lswitaj.moneymanager.database.SymbolsDatabase
+import com.lswitaj.moneymanager.data.database.SymbolsDatabase
 import com.lswitaj.moneymanager.databinding.FragmentSearchBinding
 
 class SearchFragment : Fragment() {

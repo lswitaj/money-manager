@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.lswitaj.moneymanager.signup.SignUpFragment"
+        android:name="com.lswitaj.moneymanager.authorisation.signup.SignUpFragment"
         android:label="SignUpFragment"
         tools:layout="@layout/fragment_sign_up">
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/logInFragment"
-        android:name="com.lswitaj.moneymanager.login.LogInFragment"
+        android:name="com.lswitaj.moneymanager.authorisation.login.LogInFragment"
         android:label="LogInFragment"
         tools:layout="@layout/fragment_log_in">
         <action

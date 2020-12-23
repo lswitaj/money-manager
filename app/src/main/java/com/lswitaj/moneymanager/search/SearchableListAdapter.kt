@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.lswitaj.moneymanager.databinding.ListSearchableItemBinding
-import com.lswitaj.moneymanager.network.Symbol
+import com.lswitaj.moneymanager.data.network.Symbol
 import com.lswitaj.moneymanager.search.SearchableListAdapter.SearchableListViewHolder
 
 // TODO(all those Searchable items should be more meaningful as more searches can be implemented in the app, e.g. for already added to the wallet positions)

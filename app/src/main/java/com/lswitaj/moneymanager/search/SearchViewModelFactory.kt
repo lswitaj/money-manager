@@ -2,7 +2,7 @@ package com.lswitaj.moneymanager.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.lswitaj.moneymanager.database.SymbolsDatabaseDao
+import com.lswitaj.moneymanager.data.database.SymbolsDatabaseDao
 
 class SearchViewModelFactory(
     private val dataSource: SymbolsDatabaseDao) : ViewModelProvider.Factory {

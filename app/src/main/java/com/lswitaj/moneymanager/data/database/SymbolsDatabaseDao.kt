@@ -1,4 +1,4 @@
-package com.lswitaj.moneymanager.database
+package com.lswitaj.moneymanager.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

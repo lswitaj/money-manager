@@ -2,8 +2,8 @@ package com.lswitaj.moneymanager
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.lswitaj.moneymanager.database.SymbolsOverview
-import com.lswitaj.moneymanager.network.Symbol
+import com.lswitaj.moneymanager.data.database.SymbolsOverview
+import com.lswitaj.moneymanager.data.network.Symbol
 import com.lswitaj.moneymanager.search.SearchableListAdapter
 import com.lswitaj.moneymanager.summary.SummaryListAdapter
 

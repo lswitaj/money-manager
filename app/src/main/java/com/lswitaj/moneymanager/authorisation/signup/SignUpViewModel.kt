@@ -1,4 +1,4 @@
-package com.lswitaj.moneymanager.signup
+package com.lswitaj.moneymanager.authorisation.signup
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

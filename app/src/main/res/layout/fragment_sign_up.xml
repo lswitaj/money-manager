@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.lswitaj.moneymanager.signup.SignUpViewModel" />
+            type="com.lswitaj.moneymanager.authorisation.signup.SignUpViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
