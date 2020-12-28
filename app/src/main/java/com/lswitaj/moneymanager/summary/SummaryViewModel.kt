@@ -9,6 +9,7 @@ import com.lswitaj.moneymanager.data.database.SymbolsOverview
 import com.lswitaj.moneymanager.utils.getCurrentTimestamp
 import com.lswitaj.moneymanager.utils.getYesterdayTimestamp
 import com.lswitaj.moneymanager.data.network.FinnhubApi
+import com.lswitaj.moneymanager.utils.getLastClosePrice
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -41,15 +42,15 @@ class SummaryViewModel(
         _navigateToSearch.value = false
     }
 
+    //TODO(a global var that'll tell if the price updated is necessary)
     //TODO(to add a price before adding a new symbol to the DB)
     //TODO(proper error handling to be added as it's the network fun)
     //TODO(timeout handling when the symbol doesn't have candles anymore and also maybe removing
     // it before adding to the summary lists)
-    //getting positions and updating their prices
+    // getting positions and updating their prices
     suspend fun updatePrices() {
         withContext(Dispatchers.IO) {
-            // new positions will be updated first thanks to reversing the list
-            val allPositions = database.getAllSymbolsNames().reversed()
+            val allPositions = database.getAllSymbolsNames()
 
             allPositions.forEach { symbolName ->
                 database.updatePrice(symbolName, getLastClosePrice(symbolName))
@@ -57,11 +58,4 @@ class SummaryViewModel(
         }
         allSymbols = database.getAllSymbols()
     }
-
-    //TODO(error handling when the price it's null)
-    suspend fun getLastClosePrice(symbolName: String): Double = FinnhubApi.finnhub.getCandles(
-            symbolName,
-            getYesterdayTimestamp(),
-            getCurrentTimestamp()
-        ).closePrice.last()
 }

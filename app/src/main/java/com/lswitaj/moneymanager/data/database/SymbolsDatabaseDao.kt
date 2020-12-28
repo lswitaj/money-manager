@@ -18,6 +18,9 @@ interface SymbolsDatabaseDao {
     @Query("SELECT symbol_name from all_symbols_in_a_wallet ORDER BY symbolId ASC")
     fun getAllSymbolsNames(): List<String>
 
+    @Query("SELECT * from all_symbols_in_a_wallet ORDER BY symbolId DESC LIMIT 1")
+    fun getLastSymbol(): SymbolsOverview
+
     @Query("UPDATE all_symbols_in_a_wallet SET last_close_price = :lastClosePrice WHERE (symbol_name = :symbolName AND last_close_price <> :lastClosePrice)")
     fun updatePrice(symbolName: String?, lastClosePrice: Double)
 }

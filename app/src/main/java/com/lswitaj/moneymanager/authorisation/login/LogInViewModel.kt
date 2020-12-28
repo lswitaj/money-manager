@@ -32,8 +32,6 @@ class LogInViewModel() : ViewModel() {
         ParseUser.logInInBackground(username, password) { user, e ->
             if (user != null) {
                 //TODO(to display email/username in sidebar)
-                //TODO(remove the line below if possible)
-                _errorMessage.value = user.username + " " + user.email
                 _navigateToSummary.value = true
             } else {
                 _errorMessage.value = parseErrorFormatter(e)
