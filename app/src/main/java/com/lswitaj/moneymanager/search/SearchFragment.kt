@@ -34,18 +34,15 @@ class SearchFragment : Fragment() {
 
         viewModel.navigateToSummary.observe(viewLifecycleOwner, {
             if (null != it) {
-                this.findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToSummaryFragment())
+                this.findNavController()
+                    .navigate(SearchFragmentDirections.actionSearchFragmentToSummaryFragment())
                 viewModel.addNewSymbolComplete()
             }
         })
 
         viewModel.errorMessage.observe(viewLifecycleOwner, {
-            if (null != it) {
-                showSnackbar(view, it)
-            }
+            showSnackbar(view, it)
         })
-
-        viewModel.getAllSymbols()
 
         setHasOptionsMenu(true)
         return binding.root

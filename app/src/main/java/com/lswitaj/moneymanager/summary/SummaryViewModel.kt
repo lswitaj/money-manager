@@ -6,13 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lswitaj.moneymanager.data.database.SymbolsDatabaseDao
 import com.lswitaj.moneymanager.data.database.SymbolsOverview
-import com.lswitaj.moneymanager.utils.getCurrentTimestamp
-import com.lswitaj.moneymanager.utils.getYesterdayTimestamp
-import com.lswitaj.moneymanager.data.network.FinnhubApi
 import com.lswitaj.moneymanager.utils.getLastClosePrice
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
+//TODO(export to string.xml)
+const val NO_INTERNET_MESSAGE = "There's a problem to connect with a server. Please check " +
+        "your internet connection."
 
 //TODO(to be considered refreshing prices on the launching app)
 class SummaryViewModel(
@@ -20,6 +21,10 @@ class SummaryViewModel(
 ) : ViewModel() {
 
     var allSymbols: LiveData<List<SymbolsOverview>> = database.getAllSymbols()
+
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String>
+        get() = _errorMessage
 
     init {
         viewModelScope.launch {
@@ -53,7 +58,17 @@ class SummaryViewModel(
             val allPositions = database.getAllSymbolsNames()
 
             allPositions.forEach { symbolName ->
-                database.updatePrice(symbolName, getLastClosePrice(symbolName))
+                try {
+                    database.updatePrice(symbolName, getLastClosePrice(symbolName))
+                } catch (e: Exception) {
+                    //TODO(create a dedicated error mapper)
+                    if(e.message!!.contains("resolve host")) {
+                        _errorMessage.postValue(NO_INTERNET_MESSAGE)
+                    } else {
+                        //TODO(to add this part to the final document as it describes some async stuff)
+                        _errorMessage.postValue(e.message)
+                    }
+                }
             }
         }
         allSymbols = database.getAllSymbols()
