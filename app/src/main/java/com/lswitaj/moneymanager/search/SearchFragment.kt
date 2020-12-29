@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.lswitaj.moneymanager.R
 import com.lswitaj.moneymanager.data.database.SymbolsDatabase
 import com.lswitaj.moneymanager.databinding.FragmentSearchBinding
+import com.lswitaj.moneymanager.utils.showSnackbar
 
 class SearchFragment : Fragment() {
     lateinit var viewModel: SearchViewModel
@@ -33,12 +34,15 @@ class SearchFragment : Fragment() {
 
         viewModel.navigateToSummary.observe(viewLifecycleOwner, {
             if (null != it) {
-                this.findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToSummaryFragment())
+                this.findNavController()
+                    .navigate(SearchFragmentDirections.actionSearchFragmentToSummaryFragment())
                 viewModel.addNewSymbolComplete()
             }
         })
 
-        viewModel.getAllSymbols()
+        viewModel.errorMessage.observe(viewLifecycleOwner, {
+            showSnackbar(view, it)
+        })
 
         setHasOptionsMenu(true)
         return binding.root

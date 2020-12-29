@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import com.lswitaj.moneymanager.R
 import com.lswitaj.moneymanager.data.database.SymbolsDatabase
 import com.lswitaj.moneymanager.databinding.FragmentSummaryBinding
+import com.lswitaj.moneymanager.utils.showSnackbar
 
 class SummaryFragment : Fragment() {
     lateinit var viewModel: SummaryViewModel
@@ -31,13 +32,17 @@ class SummaryFragment : Fragment() {
         binding.viewModel = viewModel
         binding.summaryList.adapter = SummaryListAdapter()
 
-        viewModel.navigateToSearch.observe(viewLifecycleOwner) { shouldNavigate ->
+        viewModel.navigateToSearch.observe(viewLifecycleOwner, { shouldNavigate ->
             if (shouldNavigate) {
                 val navController = binding.root.findNavController()
                 navController.navigate(R.id.action_summaryFragment_to_searchFragment)
                 viewModel.onNavigatedToSearch()
             }
-        }
+        })
+
+        viewModel.errorMessage.observe(viewLifecycleOwner, {
+            showSnackbar(view, it)
+        })
 
         return binding.root
     }
