@@ -1,5 +1,6 @@
 package com.lswitaj.moneymanager.summary
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.lswitaj.moneymanager.data.database.SymbolsDatabaseDao
 import com.lswitaj.moneymanager.data.database.SymbolsOverview
 import com.lswitaj.moneymanager.utils.getLastClosePrice
+import com.parse.Parse
+import com.parse.ParseUser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -26,15 +29,25 @@ class SummaryViewModel(
     val errorMessage: LiveData<String>
         get() = _errorMessage
 
-    init {
-        viewModelScope.launch {
-            updatePrices()
-        }
-    }
-
     private val _navigateToSearch = MutableLiveData<Boolean>()
     val navigateToSearch: LiveData<Boolean>
         get() = _navigateToSearch
+
+    private val _navigateToLogin = MutableLiveData<Boolean>()
+    val navigateToLogin: LiveData<Boolean>
+        get() = _navigateToLogin
+
+    init {
+        //TODO(to consider adding some special action if the user isNew == true,
+        // e.g. walkthrough or welcome message)
+        if(ParseUser.getCurrentUser() != null) {
+            viewModelScope.launch {
+                updatePrices()
+            }
+        } else {
+            _navigateToLogin.value = true
+        }
+    }
 
     //TODO(to add searching for quotes)
     //TODO(to add fancy animation to the FAB button, use fab.show() and fab.hide()
@@ -62,7 +75,7 @@ class SummaryViewModel(
                     database.updatePrice(symbolName, getLastClosePrice(symbolName))
                 } catch (e: Exception) {
                     //TODO(create a dedicated error mapper)
-                    if(e.message!!.contains("resolve host")) {
+                    if (e.message!!.contains("resolve host")) {
                         _errorMessage.postValue(NO_INTERNET_MESSAGE)
                     } else {
                         //TODO(to add this part to the final document as it describes some async stuff)

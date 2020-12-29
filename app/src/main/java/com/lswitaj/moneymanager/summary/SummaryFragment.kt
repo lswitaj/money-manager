@@ -40,6 +40,15 @@ class SummaryFragment : Fragment() {
             }
         })
 
+        viewModel.navigateToLogin.observe(viewLifecycleOwner, { shouldNavigate ->
+            if (shouldNavigate) {
+                showSnackbar(view, getString(R.string.autorisation_error_message))
+                val navController = binding.root.findNavController()
+                navController.navigate(R.id.action_summaryFragment_to_logInFragment)
+                viewModel.onNavigatedToSearch()
+            }
+        })
+
         viewModel.errorMessage.observe(viewLifecycleOwner, {
             showSnackbar(view, it)
         })
