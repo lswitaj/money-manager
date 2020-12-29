@@ -13,7 +13,7 @@
         <action
             android:id="@+id/action_signUpFragment_to_summaryFragment"
             app:destination="@id/summaryFragment"
-            app:popUpTo="@layout/fragment_sign_up"
+            app:popUpTo="@id/signUpFragment"
             app:popUpToInclusive="true" />
     </fragment>
 
@@ -25,7 +25,7 @@
         <action
             android:id="@+id/action_logInFragment_to_summaryFragment"
             app:destination="@id/summaryFragment"
-            app:popUpTo="@layout/fragment_log_in"
+            app:popUpTo="@id/logInFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_logInFragment_to_signUpFragment"
@@ -43,7 +43,7 @@
         <action
             android:id="@+id/action_summaryFragment_to_logInFragment"
             app:destination="@id/logInFragment"
-            app:popUpTo="@layout/fragment_summary"
+            app:popUpTo="@id/summaryFragment"
             app:popUpToInclusive="true" />
     </fragment>
 
@@ -54,6 +54,8 @@
         tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_summaryFragment"
-            app:destination="@id/summaryFragment" />
+            app:destination="@id/summaryFragment"
+            app:popUpTo="@id/summaryFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>
