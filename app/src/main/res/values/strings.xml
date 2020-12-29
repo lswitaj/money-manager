@@ -18,4 +18,5 @@
 
 <!-- Summary -->
     <string name="add_a_new_position">Add a new position</string>
+    <string name="autorisation_error_message">Authorisation error, please log in again.</string>
 </resources>
