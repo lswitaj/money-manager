@@ -1,9 +1,7 @@
 package com.lswitaj.moneymanager.summary
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
@@ -53,6 +51,22 @@ class SummaryFragment : Fragment() {
             showSnackbar(view, it)
         })
 
+        setHasOptionsMenu(true)
+
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        inflater.inflate(R.menu.summary_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_logout -> viewModel.logOut()
+            else -> showSnackbar(view, getString(R.string.not_implemented_error_message))
+        }
+        return true
     }
 }

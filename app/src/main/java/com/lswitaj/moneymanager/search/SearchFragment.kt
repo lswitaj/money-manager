@@ -51,12 +51,12 @@ class SearchFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
 
-        inflater.inflate(R.menu.menu_item, menu)
+        inflater.inflate(R.menu.search_menu, menu)
 
         val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem.actionView as SearchView
 
-        //TODO(to wait until all operations, requests and db inserts, are done)
+        //TODO(to wait until all operations like requests and db are done, maybe display spinner)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 viewModel.searchSymbols(query)

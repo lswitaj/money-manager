@@ -1,6 +1,7 @@
 package com.lswitaj.moneymanager.summary
 
 import android.util.Log
+import android.util.LogPrinter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,6 +18,8 @@ import kotlinx.coroutines.withContext
 //TODO(export to string.xml)
 const val NO_INTERNET_MESSAGE = "There's a problem to connect with a server. Please check " +
         "your internet connection."
+const val LOGOUT_SUCCESS_MESSAGE = "Logout successful"
+const val LOGOUT_FAILURE_MESSAGE = "Logout not successful. Please check your internet connection."
 
 //TODO(to be considered refreshing prices on the launching app)
 class SummaryViewModel(
@@ -85,5 +88,17 @@ class SummaryViewModel(
             }
         }
         allSymbols = database.getAllSymbols()
+    }
+
+    fun logOut() {
+        ParseUser.logOutInBackground()
+        if (ParseUser.getCurrentUser() == null) {
+            _errorMessage.value = LOGOUT_SUCCESS_MESSAGE
+            _navigateToLogin.value = true
+        }
+        //TODO(to make some general error messages - maybe on the activity level)
+//        else {
+//            _errorMessage.value = LOGOUT_FAILURE_MESSAGE
+//        }
     }
 }
