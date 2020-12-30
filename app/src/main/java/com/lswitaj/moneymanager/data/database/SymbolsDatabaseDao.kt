@@ -13,7 +13,7 @@ interface SymbolsDatabaseDao {
     suspend fun addSymbol(symbol: SymbolsOverview)
 
     @Query("SELECT * from all_symbols_in_a_wallet ORDER BY symbolId ASC")
-    fun getAllSymbols(): LiveData<List<SymbolsOverview>>
+    fun getAllSymbols(): LiveData<MutableList<SymbolsOverview>>
 
     @Query("SELECT symbol_name from all_symbols_in_a_wallet ORDER BY symbolId ASC")
     fun getAllSymbolsNames(): List<String>

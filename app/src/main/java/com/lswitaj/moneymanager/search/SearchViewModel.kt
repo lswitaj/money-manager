@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.room.ColumnInfo
 import com.lswitaj.moneymanager.data.database.SymbolsDatabaseDao
 import com.lswitaj.moneymanager.data.database.SymbolsOverview
 import com.lswitaj.moneymanager.data.network.FinnhubApi
@@ -70,7 +71,9 @@ class SearchViewModel(
     }
 
     fun searchSymbols(query: String) {
-        _searchableQueryResponse.value = allSymbols.filter { it.description.contains(query, true) }
+        _searchableQueryResponse.value = allSymbols.filter {
+            it.description.contains(query, true)
+        }
     }
 
     fun addNewSymbol(symbol: Symbol) {
@@ -86,7 +89,7 @@ class SearchViewModel(
                 addNewSymbolToBackend()
                 _navigateToSummary.value = symbol
             } catch (e: Exception) {
-                if(e.message!!.contains("resolve host")) {
+                if (e.message!!.contains("resolve host")) {
                     _errorMessage.value = NO_INTERNET_WHEN_ADDING_MESSAGE
                 } else {
                     _errorMessage.value = e.message
