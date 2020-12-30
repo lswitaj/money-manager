@@ -19,7 +19,8 @@ import kotlinx.coroutines.withContext
 const val NO_INTERNET_MESSAGE = "There's a problem to connect with a server. Please check " +
         "your internet connection."
 const val LOGOUT_SUCCESS_MESSAGE = "Logout successful"
-const val LOGOUT_FAILURE_MESSAGE = "Logout not successful. Please check your internet connection."
+//TODO(to be moved to the main activity)
+//const val LOGOUT_FAILURE_MESSAGE = "Logout not successful. Please check your internet connection."
 
 //TODO(to be considered refreshing prices on the launching app)
 class SummaryViewModel(
@@ -96,7 +97,8 @@ class SummaryViewModel(
             _errorMessage.value = LOGOUT_SUCCESS_MESSAGE
             _navigateToLogin.value = true
         }
-        //TODO(to make some general error messages - maybe on the activity level)
+        //TODO(to make some general error messages - maybe on the activity level - it'll be
+        // not shown if the user is redirected to the login screen)
 //        else {
 //            _errorMessage.value = LOGOUT_FAILURE_MESSAGE
 //        }

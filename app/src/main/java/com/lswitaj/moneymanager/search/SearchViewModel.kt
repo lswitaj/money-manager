@@ -10,7 +10,10 @@ import com.lswitaj.moneymanager.data.network.FinnhubApi
 import com.lswitaj.moneymanager.data.network.Symbol
 import com.lswitaj.moneymanager.utils.getLastClosePrice
 import com.lswitaj.moneymanager.utils.parseErrorFormatter
+import com.parse.Parse
+import com.parse.ParseACL
 import com.parse.ParseObject
+import com.parse.ParseUser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -99,7 +102,7 @@ class SearchViewModel(
                 //TODO(to extract all put expressions to the class)
                 symbolOverviewParse.put("symbolId", it.symbolId)
                 symbolOverviewParse.put("symbolName", it.symbolName)
-                symbolOverviewParse.put("lastClosePrice", it.lastClosePrice)
+                symbolOverviewParse.acl = ParseACL(ParseUser.getCurrentUser())
             }
             symbolOverviewParse.saveInBackground { e ->
                 if (e != null) {
