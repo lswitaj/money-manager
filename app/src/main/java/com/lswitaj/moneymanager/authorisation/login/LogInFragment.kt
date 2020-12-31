@@ -30,8 +30,7 @@ class LogInFragment : Fragment() {
         //TODO(to make navigation in search, summary and login consistent)
         viewModel.navigateToSummary.observe(viewLifecycleOwner) { shouldNavigate ->
             if (shouldNavigate) {
-                val navController = binding.root.findNavController()
-                navController.navigate(R.id.action_logInFragment_to_summaryFragment)
+                requireView().findNavController().navigate(LogInFragmentDirections.actionLogInFragmentToSummaryFragment())
                 viewModel.onNavigatedToSummary()
             }
         }

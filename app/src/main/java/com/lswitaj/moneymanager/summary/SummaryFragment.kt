@@ -2,14 +2,22 @@ package com.lswitaj.moneymanager.summary
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import com.lswitaj.moneymanager.R
+import com.lswitaj.moneymanager.authorisation.login.LogInFragment
 import com.lswitaj.moneymanager.data.database.SymbolsDatabase
 import com.lswitaj.moneymanager.databinding.FragmentSummaryBinding
 import com.lswitaj.moneymanager.utils.showSnackbar
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.lang.Thread.sleep
+import kotlin.reflect.typeOf
+
+//val args: LogInFragment by navArgs()
 
 class SummaryFragment : Fragment() {
     lateinit var viewModel: SummaryViewModel
@@ -43,7 +51,7 @@ class SummaryFragment : Fragment() {
                 showSnackbar(view, getString(R.string.autorisation_error_message))
                 val navController = binding.root.findNavController()
                 navController.navigate(R.id.action_summaryFragment_to_logInFragment)
-                viewModel.onNavigatedToSearch()
+                viewModel.onNavigatedToLogin()
             }
         })
 

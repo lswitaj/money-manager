@@ -1,7 +1,6 @@
 package com.lswitaj.moneymanager.summary
 
 import android.util.Log
-import android.util.LogPrinter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,25 +8,32 @@ import androidx.lifecycle.viewModelScope
 import com.lswitaj.moneymanager.data.database.SymbolsDatabaseDao
 import com.lswitaj.moneymanager.data.database.SymbolsOverview
 import com.lswitaj.moneymanager.utils.getLastClosePrice
-import com.parse.Parse
+import com.lswitaj.moneymanager.utils.parseErrorFormatter
+import com.parse.ParseException
+import com.parse.ParseObject
+import com.parse.ParseQuery
 import com.parse.ParseUser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 
 //TODO(export to string.xml)
 const val NO_INTERNET_MESSAGE = "There's a problem to connect with a server. Please check " +
         "your internet connection."
-const val LOGOUT_SUCCESS_MESSAGE = "Logout successful"
+
 //TODO(to be moved to the main activity)
-//const val LOGOUT_FAILURE_MESSAGE = "Logout not successful. Please check your internet connection."
+//const val LOGOUT_SUCCESS_MESSAGE = "Logout successful"
+const val LOGOUT_FAILURE_MESSAGE = "Logout not successful. Please check your internet connection."
+const val NO_RESULTS_ERROR_MESSAGE = "No results"
 
 //TODO(to be considered refreshing prices on the launching app)
 class SummaryViewModel(
     val database: SymbolsDatabaseDao
 ) : ViewModel() {
-
-    var allSymbols: LiveData<List<SymbolsOverview>> = database.getAllSymbols()
+    var allSymbols: LiveData<MutableList<SymbolsOverview>> = database.getAllSymbols()
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String>
@@ -44,8 +50,9 @@ class SummaryViewModel(
     init {
         //TODO(to consider adding some special action if the user isNew == true,
         // e.g. walkthrough or welcome message)
-        if(ParseUser.getCurrentUser() != null) {
+        if (ParseUser.getCurrentUser() != null) {
             viewModelScope.launch {
+                refreshSymbols()
                 updatePrices()
             }
         } else {
@@ -64,13 +71,17 @@ class SummaryViewModel(
         _navigateToSearch.value = false
     }
 
+    fun onNavigatedToLogin() {
+        _navigateToLogin.value = false
+    }
+
     //TODO(a global var that'll tell if the price updated is necessary)
     //TODO(to add a price before adding a new symbol to the DB)
     //TODO(proper error handling to be added as it's the network fun)
     //TODO(timeout handling when the symbol doesn't have candles anymore and also maybe removing
     // it before adding to the summary lists)
     // getting positions and updating their prices
-    suspend fun updatePrices() {
+    private suspend fun updatePrices() {
         withContext(Dispatchers.IO) {
             val allPositions = database.getAllSymbolsNames()
 
@@ -92,15 +103,53 @@ class SummaryViewModel(
     }
 
     fun logOut() {
-        ParseUser.logOutInBackground()
-        if (ParseUser.getCurrentUser() == null) {
-            _errorMessage.value = LOGOUT_SUCCESS_MESSAGE
-            _navigateToLogin.value = true
+        try {
+            //TODO(consider changing the logout logic to logOutInBackground)
+            ParseUser.logOut()
+            if (ParseUser.getCurrentUser() == null) {
+                //TODO(to make some general error messages - maybe on the activity level - it'll be
+                // not shown if the user is redirected to the login screen)
+                //_errorMessage.value = LOGOUT_SUCCESS_MESSAGE
+                _navigateToLogin.value = true
+            }
+        } catch (e: Exception) {
+            _errorMessage.value = LOGOUT_FAILURE_MESSAGE
         }
-        //TODO(to make some general error messages - maybe on the activity level - it'll be
-        // not shown if the user is redirected to the login screen)
-//        else {
-//            _errorMessage.value = LOGOUT_FAILURE_MESSAGE
-//        }
+    }
+
+    private suspend fun refreshSymbols() {
+        withContext(Dispatchers.IO) {
+            if (database.countSymbols() != 0) {
+                return@withContext
+            } else {
+                //TODO(not retrieve public objects, how to use ACL for this?)
+                val query: ParseQuery<ParseObject> = ParseQuery.getQuery("SymbolOverviewParse")
+                query.findInBackground { resultsList: MutableList<ParseObject>?, e: ParseException? ->
+                    when {
+                        resultsList == null -> _errorMessage.value = NO_RESULTS_ERROR_MESSAGE
+                        e != null -> _errorMessage.value = parseErrorFormatter(e)
+                        else -> viewModelScope.launch {
+                            downloadDataFromServer(resultsList)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //TODO(to add some spinner when this function is in progress)
+    // add the symbol from the server db to the local db
+    private suspend fun downloadDataFromServer(resultsList: MutableList<ParseObject>?) {
+        viewModelScope.launch {
+            resultsList?.forEach { result ->
+                val symbolName = result.get("symbolName").toString()
+                database.addSymbol(
+                    SymbolsOverview(
+                        symbolName,
+                        getLastClosePrice(symbolName).toBigDecimal().toPlainString()
+                    )
+                )
+            }
+        }
     }
 }
