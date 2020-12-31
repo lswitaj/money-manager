@@ -48,7 +48,7 @@ class SearchViewModel(
     val errorMessage: LiveData<String>
         get() = _errorMessage
 
-    fun getAllSymbols() {
+    private fun getAllSymbols() {
         viewModelScope.launch {
             try {
                 val result = FinnhubApi.finnhub.getSymbolsFromExchange()
@@ -56,7 +56,6 @@ class SearchViewModel(
                 allSymbols = result
                     .filter { it.description.isNotEmpty() }
                     .filter { !it.symbol.contains(regex = Regex("""=+|\^+|#+|-+""")) }
-
                 _searchableQueryResponse.value = allSymbols
             } catch (e: Exception) {
                 //TODO(create a dedicated error mapper)
@@ -71,9 +70,8 @@ class SearchViewModel(
     }
 
     fun searchSymbols(query: String) {
-        _searchableQueryResponse.value = allSymbols.filter {
-            it.description.contains(query, true)
-        }
+        _searchableQueryResponse.value = allSymbols
+            .filter{ it.description.contains(query, true) }
     }
 
     fun addNewSymbol(symbol: Symbol) {
@@ -98,7 +96,7 @@ class SearchViewModel(
         }
     }
 
-    suspend fun addNewSymbolToBackend() {
+    private suspend fun addNewSymbolToBackend() {
         withContext(Dispatchers.IO) {
             val symbolOverviewParse = ParseObject("SymbolOverviewParse")
             database.getLastSymbol().let {
