@@ -12,6 +12,8 @@ import com.lswitaj.moneymanager.authorisation.login.LogInFragment
 import com.lswitaj.moneymanager.data.database.SymbolsDatabase
 import com.lswitaj.moneymanager.databinding.FragmentSummaryBinding
 import com.lswitaj.moneymanager.utils.showSnackbar
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.lang.Thread.sleep
 import kotlin.reflect.typeOf
 
@@ -35,8 +37,6 @@ class SummaryFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         binding.summaryList.adapter = SummaryListAdapter()
-
-        viewModel.refreshSymbols(requireArguments().getBoolean("downloadDataFromServer"))
 
         viewModel.navigateToSearch.observe(viewLifecycleOwner, { shouldNavigate ->
             if (shouldNavigate) {
