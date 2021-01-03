@@ -1,6 +1,5 @@
 package com.lswitaj.moneymanager.summary
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,9 +14,6 @@ import com.parse.ParseQuery
 import com.parse.ParseUser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 
 //TODO(export to string.xml)
@@ -27,7 +23,8 @@ const val NO_INTERNET_MESSAGE = "There's a problem to connect with a server. Ple
 //TODO(to be moved to the main activity)
 //const val LOGOUT_SUCCESS_MESSAGE = "Logout successful"
 const val LOGOUT_FAILURE_MESSAGE = "Logout not successful. Please check your internet connection."
-const val NO_RESULTS_ERROR_MESSAGE = "No results"
+const val NO_RESULTS_ERROR_MESSAGE = "No results."
+const val AUTH_ERROR_MESSAGE = "Authorisation error, please log in again."
 
 //TODO(to be considered refreshing prices on the launching app)
 class SummaryViewModel(
@@ -50,12 +47,14 @@ class SummaryViewModel(
     init {
         //TODO(to consider adding some special action if the user isNew == true,
         // e.g. walkthrough or welcome message)
+        // if the user session doesn't exist redirect him to the log in screen
         if (ParseUser.getCurrentUser() != null) {
             viewModelScope.launch {
                 refreshSymbols()
                 updatePrices()
             }
         } else {
+            _errorMessage.value = AUTH_ERROR_MESSAGE
             _navigateToLogin.value = true
         }
     }
