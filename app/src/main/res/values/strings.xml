@@ -8,6 +8,7 @@
 
 <!-- Menu -->
     <string name="search">Search</string>
+    <string name="logout">Log out</string>
 
 <!-- Sign up and Log in -->
     <string name="username">Username</string>
@@ -18,4 +19,7 @@
 
 <!-- Summary -->
     <string name="add_a_new_position">Add a new position</string>
+
+<!-- Error messages -->
+    <string name="not_implemented_error_message">Option not implemented yet. Please, contact us.</string>
 </resources>

@@ -10,7 +10,7 @@ import com.lswitaj.moneymanager.summary.SummaryListAdapter
 @BindingAdapter("listData")
 fun bindSearchableList(recyclerView: RecyclerView, data: List<Symbol>?) {
     val adapter = recyclerView.adapter as SearchableListAdapter
-    adapter.submitList(data) {
+    adapter.submitList(data?.take(100)) {
         // scroll the list to the top after the diffs are calculated and posted
         recyclerView.scrollToPosition(0)
     }

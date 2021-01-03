@@ -4,13 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.room.ColumnInfo
 import com.lswitaj.moneymanager.data.database.SymbolsDatabaseDao
 import com.lswitaj.moneymanager.data.database.SymbolsOverview
 import com.lswitaj.moneymanager.data.network.FinnhubApi
 import com.lswitaj.moneymanager.data.network.Symbol
 import com.lswitaj.moneymanager.utils.getLastClosePrice
 import com.lswitaj.moneymanager.utils.parseErrorFormatter
+import com.parse.Parse
+import com.parse.ParseACL
 import com.parse.ParseObject
+import com.parse.ParseUser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -44,7 +48,7 @@ class SearchViewModel(
     val errorMessage: LiveData<String>
         get() = _errorMessage
 
-    fun getAllSymbols() {
+    private fun getAllSymbols() {
         viewModelScope.launch {
             try {
                 val result = FinnhubApi.finnhub.getSymbolsFromExchange()
@@ -52,7 +56,6 @@ class SearchViewModel(
                 allSymbols = result
                     .filter { it.description.isNotEmpty() }
                     .filter { !it.symbol.contains(regex = Regex("""=+|\^+|#+|-+""")) }
-
                 _searchableQueryResponse.value = allSymbols
             } catch (e: Exception) {
                 //TODO(create a dedicated error mapper)
@@ -67,7 +70,8 @@ class SearchViewModel(
     }
 
     fun searchSymbols(query: String) {
-        _searchableQueryResponse.value = allSymbols.filter { it.description.contains(query, true) }
+        _searchableQueryResponse.value = allSymbols
+            .filter{ it.description.contains(query, true) }
     }
 
     fun addNewSymbol(symbol: Symbol) {
@@ -83,7 +87,7 @@ class SearchViewModel(
                 addNewSymbolToBackend()
                 _navigateToSummary.value = symbol
             } catch (e: Exception) {
-                if(e.message!!.contains("resolve host")) {
+                if (e.message!!.contains("resolve host")) {
                     _errorMessage.value = NO_INTERNET_WHEN_ADDING_MESSAGE
                 } else {
                     _errorMessage.value = e.message
@@ -92,14 +96,14 @@ class SearchViewModel(
         }
     }
 
-    suspend fun addNewSymbolToBackend() {
+    private suspend fun addNewSymbolToBackend() {
         withContext(Dispatchers.IO) {
             val symbolOverviewParse = ParseObject("SymbolOverviewParse")
             database.getLastSymbol().let {
                 //TODO(to extract all put expressions to the class)
                 symbolOverviewParse.put("symbolId", it.symbolId)
                 symbolOverviewParse.put("symbolName", it.symbolName)
-                symbolOverviewParse.put("lastClosePrice", it.lastClosePrice)
+                symbolOverviewParse.acl = ParseACL(ParseUser.getCurrentUser())
             }
             symbolOverviewParse.saveInBackground { e ->
                 if (e != null) {

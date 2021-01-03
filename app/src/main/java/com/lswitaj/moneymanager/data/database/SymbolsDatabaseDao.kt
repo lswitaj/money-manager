@@ -23,4 +23,7 @@ interface SymbolsDatabaseDao {
 
     @Query("UPDATE all_symbols_in_a_wallet SET last_close_price = :lastClosePrice WHERE (symbol_name = :symbolName AND last_close_price <> :lastClosePrice)")
     fun updatePrice(symbolName: String?, lastClosePrice: Double)
+
+    @Query("SELECT COUNT(*) AS SymbolsCount FROM all_symbols_in_a_wallet")
+    fun countSymbols(): Int
 }
