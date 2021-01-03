@@ -33,7 +33,7 @@ const val NO_RESULTS_ERROR_MESSAGE = "No results"
 class SummaryViewModel(
     val database: SymbolsDatabaseDao
 ) : ViewModel() {
-    var allSymbols: LiveData<MutableList<SymbolsOverview>> = database.getAllSymbols()
+    var allSymbols: LiveData<List<SymbolsOverview>> = database.getAllSymbols()
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String>

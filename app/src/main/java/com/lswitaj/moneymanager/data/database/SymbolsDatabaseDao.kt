@@ -13,7 +13,7 @@ interface SymbolsDatabaseDao {
     suspend fun addSymbol(symbol: SymbolsOverview)
 
     @Query("SELECT * from all_symbols_in_a_wallet ORDER BY symbolId ASC")
-    fun getAllSymbols(): LiveData<MutableList<SymbolsOverview>>
+    fun getAllSymbols(): LiveData<List<SymbolsOverview>>
 
     @Query("SELECT symbol_name from all_symbols_in_a_wallet ORDER BY symbolId ASC")
     fun getAllSymbolsNames(): List<String>
@@ -24,6 +24,6 @@ interface SymbolsDatabaseDao {
     @Query("UPDATE all_symbols_in_a_wallet SET last_close_price = :lastClosePrice WHERE (symbol_name = :symbolName AND last_close_price <> :lastClosePrice)")
     fun updatePrice(symbolName: String?, lastClosePrice: Double)
 
-    @Query("SELECT COUNT(*) AS RowCnt FROM all_symbols_in_a_wallet")
+    @Query("SELECT COUNT(*) AS SymbolsCount FROM all_symbols_in_a_wallet")
     fun countSymbols(): Int
 }

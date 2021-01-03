@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 
 //TODO(to adjust the word wallet, assets, symbols, etc.)
 @Entity(tableName = "all_symbols_in_a_wallet")
-class SymbolsOverview(
+data class SymbolsOverview(
     @ColumnInfo(name = "symbol_name")
     var symbolName: String,
 
