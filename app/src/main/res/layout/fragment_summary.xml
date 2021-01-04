@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.lswitaj.moneymanager.summary.SummaryViewModel" />
@@ -78,9 +79,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
+            android:contentDescription="@string/add_a_new_position"
             android:onClick="@{() -> viewModel.onFabClicked()}"
-            app:srcCompat="@drawable/ic_baseline_add_24"
-            android:contentDescription="@string/add_a_new_position" />
-
+            app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+            app:srcCompat="@drawable/ic_baseline_add_24" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
