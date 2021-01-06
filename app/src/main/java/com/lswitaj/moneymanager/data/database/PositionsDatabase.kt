@@ -19,7 +19,6 @@ abstract class PositionsDatabase : RoomDatabase() {
         fun getInstance(context: Context): PositionsDatabase {
             synchronized(this) {
                 var instance = INSTANCE
-                //TODO("adjust the wallet name here")
                 if (instance == null) {
                     instance = Room.databaseBuilder(
                         context.applicationContext,

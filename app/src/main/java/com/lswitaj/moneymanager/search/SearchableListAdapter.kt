@@ -10,7 +10,8 @@ import com.lswitaj.moneymanager.data.network.Symbol
 import com.lswitaj.moneymanager.search.SearchableListAdapter.SearchableListViewHolder
 
 // TODO(all those Searchable items should be more meaningful as more searches can be implemented in the app, e.g. for already added to the wallet positions)
-class SearchableListAdapter(val onClickListener: OnClickListener) : ListAdapter<Symbol, SearchableListViewHolder>(DiffCallback) {
+class SearchableListAdapter(val onClickListener: OnClickListener) :
+    ListAdapter<Symbol, SearchableListViewHolder>(DiffCallback) {
     companion object DiffCallback : DiffUtil.ItemCallback<Symbol>() {
         override fun areItemsTheSame(oldItem: Symbol, newItem: Symbol): Boolean {
             return oldItem === newItem
@@ -43,7 +44,7 @@ class SearchableListAdapter(val onClickListener: OnClickListener) : ListAdapter<
 
     override fun onBindViewHolder(holder: SearchableListViewHolder, position: Int) {
         val searchableSymbol = getItem(position)
-        holder.itemView.setOnClickListener { 
+        holder.itemView.setOnClickListener {
             onClickListener.onClick(searchableSymbol)
         }
         holder.bind(searchableSymbol)

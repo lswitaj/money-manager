@@ -19,7 +19,7 @@
 
 <!-- Search -->
     <string name="search">Search</string>
-    <string name="symbol_hint_example">TSLA</string>
+    <string name="symbol_hint_example">ERROR_OCCURRED</string>
     <string name="quantity">Quantity</string>
 
 <!-- Error messages -->

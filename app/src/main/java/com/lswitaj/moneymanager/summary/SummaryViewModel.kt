@@ -62,8 +62,6 @@ class SummaryViewModel(
     }
 
     //TODO(to add searching for quotes)
-    //TODO(to add fancy animation to the FAB button, use fab.show() and fab.hide()
-    // methods https://material.io/develop/android/components/floating-action-button#regular-fabs)
     fun onFabClicked() {
         _navigateToSearch.value = true
     }
@@ -77,7 +75,7 @@ class SummaryViewModel(
     }
 
     //TODO(a global var that'll tell if the price updated is necessary)
-    //TODO(add refresh on refreshing the aoo - e.g. scroll the screen down and display the spinner)
+    //TODO(add refresh on refreshing the app - e.g. scroll the screen down and display the spinner)
     //TODO(proper error handling to be added as it's the network fun)
     // getting positions and updating their prices
     private suspend fun updatePrices() {

@@ -15,8 +15,7 @@ fun getYesterdayTimestamp(): String {
 
 //TODO(error handling when the price it's null)
 suspend fun getLastClosePrice(symbolName: String): Double = FinnhubApi.finnhub.getCandles(
-    //symbolName,
-    "IBM",
+    symbolName,
     getYesterdayTimestamp(),
     getCurrentTimestamp()
 ).closePrice.last()
