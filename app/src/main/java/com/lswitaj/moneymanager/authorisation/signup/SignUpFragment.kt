@@ -34,7 +34,7 @@ class SignUpFragment : Fragment() {
             if (shouldNavigate) {
                 val navController = binding.root.findNavController()
                 navController.navigate(R.id.action_signUpFragment_to_summaryFragment)
-                viewModel.onNavigatedToLogIn()
+                viewModel.onNavigatedToSummary()
             }
         }
 

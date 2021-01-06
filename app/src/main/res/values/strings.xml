@@ -6,10 +6,6 @@
     <string name="back4app_app_id">RXb5TqfFxjO9QueIF0Mz5Lw8MfAys6JghDmqGfH3</string>
     <string name="back4app_client_key">ceXYMxtoFOq5yLc2M2aGxOieNDz7uTCb5TK4bS9G</string>
 
-<!-- Menu -->
-    <string name="search">Search</string>
-    <string name="logout">Log out</string>
-
 <!-- Sign up and Log in -->
     <string name="username">Username</string>
     <string name="password">Password</string>
@@ -19,7 +15,18 @@
 
 <!-- Summary -->
     <string name="add_a_new_position">Add a new position</string>
+    <string name="logout">Log out</string>
+
+<!-- Search -->
+    <string name="search">Search</string>
+    <string name="symbol_hint_example">TSLA</string>
+    <string name="quantity">Quantity</string>
 
 <!-- Error messages -->
     <string name="not_implemented_error_message">Option not implemented yet. Please, contact us.</string>
+    <string name="buy_price">Buy price</string>
+    <string name="price_example">200.0</string>
+    <string name="add_position">Add position</string>
+
+    <!-- To be categorized -->
 </resources>

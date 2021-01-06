@@ -57,7 +57,7 @@ class SignUpViewModel() : ViewModel() {
         }
     }
 
-    fun onNavigatedToLogIn() {
+    fun onNavigatedToSummary() {
         _navigateToSummary.value = false
     }
 }

@@ -5,25 +5,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.lswitaj.moneymanager.data.database.SymbolsOverview
+import com.lswitaj.moneymanager.data.database.Position
 import com.lswitaj.moneymanager.databinding.ListSummaryItemBinding
 import com.lswitaj.moneymanager.summary.SummaryListAdapter.SummaryListViewHolder
 
-class SummaryListAdapter() : ListAdapter<SymbolsOverview, SummaryListViewHolder>(DiffCallback) {
-    companion object DiffCallback : DiffUtil.ItemCallback<SymbolsOverview>() {
-        override fun areItemsTheSame(oldItem: SymbolsOverview, newItem: SymbolsOverview): Boolean {
+class SummaryListAdapter() : ListAdapter<Position, SummaryListViewHolder>(DiffCallback) {
+    companion object DiffCallback : DiffUtil.ItemCallback<Position>() {
+        override fun areItemsTheSame(oldItem: Position, newItem: Position): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: SymbolsOverview, newItem: SymbolsOverview): Boolean {
-            return oldItem.symbolId == newItem.symbolId
+        override fun areContentsTheSame(oldItem: Position, newItem: Position): Boolean {
+            return oldItem.positionId == newItem.positionId
         }
     }
 
     class SummaryListViewHolder(private var binding: ListSummaryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(symbolOverview: SymbolsOverview) {
-            binding.symbolOverview = symbolOverview
+        fun bind(position: Position) {
+            binding.position = position
             binding.executePendingBindings()
         }
 
@@ -41,7 +41,7 @@ class SummaryListAdapter() : ListAdapter<SymbolsOverview, SummaryListViewHolder>
     }
 
     override fun onBindViewHolder(holder: SummaryListViewHolder, position: Int) {
-        val symbol = getItem(position)
-        holder.bind(symbol)
+        val position = getItem(position)
+        holder.bind(position)
     }
 }

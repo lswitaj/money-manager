@@ -26,8 +26,7 @@
             android:id="@+id/action_logInFragment_to_summaryFragment"
             app:destination="@id/summaryFragment"
             app:popUpTo="@id/logInFragment"
-            app:popUpToInclusive="true">
-        </action>
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_logInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
@@ -54,9 +53,26 @@
         android:label="SearchFragment"
         tools:layout="@layout/fragment_search">
         <action
-            android:id="@+id/action_searchFragment_to_summaryFragment"
+            android:id="@+id/action_searchFragment_to_addPositionFragment"
+            app:destination="@id/addPositionFragment">
+            <argument
+                android:name="positionName"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/addPositionFragment"
+        android:name="com.lswitaj.moneymanager.addPosition.AddPositionFragment"
+        android:label="AddPositionFragment"
+        tools:layout="@layout/fragment_add_position">
+        <action
+            android:id="@+id/action_addPositionFragment_to_summaryFragment"
             app:destination="@id/summaryFragment"
-            app:popUpTo="@id/summaryFragment"
+            app:popUpTo="@id/addPositionFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="positionName"
+            app:argType="string" />
     </fragment>
 </navigation>

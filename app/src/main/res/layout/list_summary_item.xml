@@ -6,8 +6,8 @@
 
     <data>
         <variable
-            name="symbolOverview"
-            type="com.lswitaj.moneymanager.data.database.SymbolsOverview" />
+            name="position"
+            type="com.lswitaj.moneymanager.data.database.Position" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="@{symbolOverview.symbolName}"
+            android:text="@{position.positionName}"
             android:textAlignment="viewStart"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -36,7 +36,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:padding="16dp"
-            android:text="@{symbolOverview.lastClosePrice}"
+            android:text="@{position.lastClosePrice}"
             android:textAlignment="viewEnd"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"

@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.lswitaj.moneymanager.R
-import com.lswitaj.moneymanager.data.database.SymbolsDatabase
+import com.lswitaj.moneymanager.data.database.PositionsDatabase
 import com.lswitaj.moneymanager.databinding.FragmentSearchBinding
 import com.lswitaj.moneymanager.utils.showSnackbar
 
@@ -22,21 +22,22 @@ class SearchFragment : Fragment() {
         val binding = FragmentSearchBinding.inflate(inflater)
 
         val application = requireNotNull(this.activity).application
-        val dataSource = SymbolsDatabase.getInstance(application).symbolsDatabaseDao
+        val dataSource = PositionsDatabase.getInstance(application).positionsDatabaseDao
         val viewModelFactory = SearchViewModelFactory(dataSource)
         viewModel = ViewModelProvider(this, viewModelFactory).get(SearchViewModel::class.java)
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         binding.searchList.adapter = SearchableListAdapter(SearchableListAdapter.OnClickListener {
-            viewModel.addNewSymbol(it)
+            viewModel.onNavigateToAddPosition(it)
         })
 
-        viewModel.navigateToSummary.observe(viewLifecycleOwner, {
-            if (null != it) {
+        viewModel.navigateToAddPosition.observe(viewLifecycleOwner, { shouldNavigate ->
+            if (shouldNavigate) {
+                //TODO(to change positionName to the whole position instead as it was before)
                 this.findNavController()
-                    .navigate(SearchFragmentDirections.actionSearchFragmentToSummaryFragment())
-                viewModel.addNewSymbolComplete()
+                    .navigate(SearchFragmentDirections.actionSearchFragmentToAddPositionFragment(viewModel.positionName))
+                viewModel.onNavigatedToAddPosition()
             }
         })
 

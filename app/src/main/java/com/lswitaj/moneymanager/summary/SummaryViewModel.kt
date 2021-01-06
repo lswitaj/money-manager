@@ -1,11 +1,12 @@
 package com.lswitaj.moneymanager.summary
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lswitaj.moneymanager.data.database.SymbolsDatabaseDao
-import com.lswitaj.moneymanager.data.database.SymbolsOverview
+import com.lswitaj.moneymanager.data.database.Position
+import com.lswitaj.moneymanager.data.database.PositionsDatabaseDao
 import com.lswitaj.moneymanager.utils.getLastClosePrice
 import com.lswitaj.moneymanager.utils.parseErrorFormatter
 import com.parse.ParseException
@@ -28,9 +29,9 @@ const val AUTH_ERROR_MESSAGE = "Authorisation error, please log in again."
 
 //TODO(to be considered refreshing prices on the launching app)
 class SummaryViewModel(
-    val database: SymbolsDatabaseDao
+    val database: PositionsDatabaseDao
 ) : ViewModel() {
-    var allSymbols: LiveData<List<SymbolsOverview>> = database.getAllSymbols()
+    var allPositions: LiveData<List<Position>> = database.getAllPositions()
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String>
@@ -50,7 +51,7 @@ class SummaryViewModel(
         // if the user session doesn't exist redirect him to the log in screen
         if (ParseUser.getCurrentUser() != null) {
             viewModelScope.launch {
-                refreshSymbols()
+                refreshPositions()
                 updatePrices()
             }
         } else {
@@ -75,18 +76,17 @@ class SummaryViewModel(
     }
 
     //TODO(a global var that'll tell if the price updated is necessary)
-    //TODO(to add a price before adding a new symbol to the DB)
+    //TODO(add refresh on refreshing the aoo - e.g. scroll the screen down and display the spinner)
     //TODO(proper error handling to be added as it's the network fun)
-    //TODO(timeout handling when the symbol doesn't have candles anymore and also maybe removing
-    // it before adding to the summary lists)
     // getting positions and updating their prices
     private suspend fun updatePrices() {
         withContext(Dispatchers.IO) {
-            val allPositions = database.getAllSymbolsNames()
+            val allPositions = database.getAllPositionNames()
 
-            allPositions.forEach { symbolName ->
+            allPositions.forEach { positionName ->
                 try {
-                    database.updatePrice(symbolName, getLastClosePrice(symbolName))
+                    Log.w("positionSummaryUpdate", positionName)
+                    database.updatePrice(positionName, getLastClosePrice(positionName))
                 } catch (e: Exception) {
                     //TODO(create a dedicated error mapper)
                     if (e.message!!.contains("resolve host")) {
@@ -98,7 +98,7 @@ class SummaryViewModel(
                 }
             }
         }
-        allSymbols = database.getAllSymbols()
+        allPositions = database.getAllPositions()
     }
 
     fun logOut() {
@@ -116,13 +116,13 @@ class SummaryViewModel(
         }
     }
 
-    private suspend fun refreshSymbols() {
+    private suspend fun refreshPositions() {
         withContext(Dispatchers.IO) {
-            if (database.countSymbols() != 0) {
+            if (database.countPositions() != 0) {
                 return@withContext
             } else {
                 //TODO(not retrieve public objects, how to use ACL for this?)
-                val query: ParseQuery<ParseObject> = ParseQuery.getQuery("SymbolOverviewParse")
+                val query: ParseQuery<ParseObject> = ParseQuery.getQuery("Position")
                 query.findInBackground { resultsList: MutableList<ParseObject>?, e: ParseException? ->
                     when {
                         resultsList == null -> _errorMessage.value = NO_RESULTS_ERROR_MESSAGE
@@ -141,11 +141,13 @@ class SummaryViewModel(
     private suspend fun downloadDataFromServer(resultsList: MutableList<ParseObject>?) {
         viewModelScope.launch {
             resultsList?.forEach { result ->
-                val symbolName = result.get("symbolName").toString()
-                database.addSymbol(
-                    SymbolsOverview(
-                        symbolName,
-                        getLastClosePrice(symbolName).toBigDecimal().toPlainString()
+                val positionName = result.get("positionName").toString()
+                Log.w("positionSummaryDownload", positionName)
+                database.addPosition(
+                    Position(
+                        positionName,
+                        //TODO(change with double formatter)
+                        getLastClosePrice(positionName).toBigDecimal().toPlainString()
                     )
                 )
             }
