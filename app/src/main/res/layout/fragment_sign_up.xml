@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.lswitaj.moneymanager.authorisation.signup.SignUpViewModel" />
@@ -45,9 +44,9 @@
                     android:hint="@string/username"
                     android:inputType="textPersonName"
                     android:text="@={viewModel.username}"
-                    app:layout_constraintEnd_toEndOf="@+id/email_input"
-                    app:layout_constraintStart_toStartOf="@+id/email_input"
-                    app:layout_constraintTop_toBottomOf="@+id/email_input" />
+                    app:layout_constraintEnd_toEndOf="@id/email_input"
+                    app:layout_constraintStart_toStartOf="@id/email_input"
+                    app:layout_constraintTop_toBottomOf="@id/email_input" />
 
                 <EditText
                     android:id="@+id/password_input"
@@ -60,7 +59,7 @@
                     android:text="@={viewModel.password}"
                     app:layout_constraintEnd_toEndOf="@id/email_input"
                     app:layout_constraintStart_toStartOf="@id/email_input"
-                    app:layout_constraintTop_toBottomOf="@+id/username_input" />
+                    app:layout_constraintTop_toBottomOf="@id/username_input" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/sign_up_button"
@@ -72,7 +71,7 @@
                     android:text="@string/sign_up"
                     app:layout_constraintEnd_toEndOf="@id/email_input"
                     app:layout_constraintStart_toStartOf="@id/email_input"
-                    app:layout_constraintTop_toBottomOf="@+id/password_input" />
+                    app:layout_constraintTop_toBottomOf="@id/password_input" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

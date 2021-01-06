@@ -17,7 +17,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/name"
-            android:layout_width="0dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:text="@{position.positionName}"
@@ -30,17 +30,52 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="OPR" />
 
+        <!-- TODO(style those numbers) -->
         <!-- TODO(to add a nice price formatter) -->
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/price"
-            android:layout_width="0dp"
+            android:id="@+id/buy_price"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:padding="16dp"
-            android:text="@{position.lastClosePrice}"
-            android:textAlignment="viewEnd"
+            android:text="@{position.buyPrice}"
+            android:textAlignment="textStart"
             android:textSize="16sp"
+            android:maxLength="8"
+            android:ellipsize="end"
+            app:layout_constraintBottom_toBottomOf="@id/name"
+            app:layout_constraintEnd_toStartOf="@id/quantity"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@id/name"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="160.3" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@{position.quantity}"
+            android:textAlignment="textStart"
+            android:textSize="16sp"
+            android:maxLength="8"
+            android:ellipsize="end"
+            app:layout_constraintBottom_toBottomOf="@id/name"
+            app:layout_constraintEnd_toStartOf="@id/current_price"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@id/buy_price"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="4" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/current_price"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@{position.lastClosePrice}"
+            android:textAlignment="textStart"
+            android:textSize="16sp"
+            android:maxLength="8"
+            android:ellipsize="end"
+            app:layout_constraintBottom_toBottomOf="@id/name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="194.36" />

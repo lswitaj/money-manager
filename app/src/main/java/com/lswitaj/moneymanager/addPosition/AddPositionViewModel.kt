@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lswitaj.moneymanager.data.database.Position
 import com.lswitaj.moneymanager.data.database.PositionsDatabaseDao
-import com.lswitaj.moneymanager.data.network.Symbol
 import com.lswitaj.moneymanager.search.NO_INTERNET_WHEN_ADDING_MESSAGE
 import com.lswitaj.moneymanager.utils.getLastClosePrice
 import com.lswitaj.moneymanager.utils.parseErrorFormatter
@@ -50,11 +49,15 @@ class AddPositionViewModel(
         }
     }
 
+    //TODO(add validation similar to the SignUp)
     fun onAddPositionButtonClicked() {
+        Log.w("BUTTON", "ADD POSITION BUTTON CLICKED")
         //TODO(symbol should be read somewhere here)
         viewModelScope.launch {
+            Log.w("BUTTON", "ENTERED THE COROUTINE")
             //TODO(to change price to double)
             try {
+                Log.w("BUTTON", "ENTERED THE TRY")
                 database.addPosition(
                     Position(
                         _positionName.value!!,
@@ -66,6 +69,8 @@ class AddPositionViewModel(
                 addNewPositionToBackend()
                 _navigateToSummary.value = true
             } catch (e: Exception) {
+                Log.w("BUTTON", "ENTERED THE CATCH")
+                Log.w("BUTTON", e.message!!)
                 if (e.message!!.contains("resolve host")) {
                     _errorMessage.value = NO_INTERNET_WHEN_ADDING_MESSAGE
                 } else {
@@ -76,7 +81,9 @@ class AddPositionViewModel(
     }
 
     private suspend fun addNewPositionToBackend() {
+        Log.w("BUTTON", "ENTERED THE BACKEND ADD")
         withContext(Dispatchers.IO) {
+            Log.w("BUTTON", "ENTERED THE COROUTINE")
             val parsePosition = ParseObject("Position")
             database.getLastPosition().let {
                 //TODO(to extract all put expressions to the class)

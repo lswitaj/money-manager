@@ -20,9 +20,9 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentSearchBinding.inflate(inflater)
-
         val application = requireNotNull(this.activity).application
         val dataSource = PositionsDatabase.getInstance(application).positionsDatabaseDao
+
         val viewModelFactory = SearchViewModelFactory(dataSource)
         viewModel = ViewModelProvider(this, viewModelFactory).get(SearchViewModel::class.java)
 

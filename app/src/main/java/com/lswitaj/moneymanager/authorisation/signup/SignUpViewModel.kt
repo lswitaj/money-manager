@@ -46,8 +46,7 @@ class SignUpViewModel() : ViewModel() {
             else -> signUpReady = true
         }
 
-        if(signUpReady)
-        {
+        if(signUpReady) {
             user.signUpInBackground { e ->
             if (e == null) {
                 _navigateToSummary.value = true

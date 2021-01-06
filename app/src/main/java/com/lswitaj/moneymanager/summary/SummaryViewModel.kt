@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.room.ColumnInfo
 import com.lswitaj.moneymanager.data.database.Position
 import com.lswitaj.moneymanager.data.database.PositionsDatabaseDao
 import com.lswitaj.moneymanager.utils.getLastClosePrice
@@ -85,7 +86,6 @@ class SummaryViewModel(
 
             allPositions.forEach { positionName ->
                 try {
-                    Log.w("positionSummaryUpdate", positionName)
                     database.updatePrice(positionName, getLastClosePrice(positionName))
                 } catch (e: Exception) {
                     //TODO(create a dedicated error mapper)
@@ -142,12 +142,16 @@ class SummaryViewModel(
         viewModelScope.launch {
             resultsList?.forEach { result ->
                 val positionName = result.get("positionName").toString()
-                Log.w("positionSummaryDownload", positionName)
+                val buyPrice = result.get("buyPrice").toString()
+                val quantity = result.get("quantity").toString()
                 database.addPosition(
                     Position(
                         positionName,
+                        buyPrice,
+                        quantity,
                         //TODO(change with double formatter)
                         getLastClosePrice(positionName).toBigDecimal().toPlainString()
+                        //TODO(add profit ratio)
                     )
                 )
             }

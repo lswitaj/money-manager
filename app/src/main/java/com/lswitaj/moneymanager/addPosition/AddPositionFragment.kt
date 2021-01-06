@@ -23,15 +23,15 @@ class AddPositionFragment : Fragment() {
     ): View {
         val binding = FragmentAddPositionBinding.inflate(inflater)
         val application = requireNotNull(this.activity).application
-
         val dataSource = PositionsDatabase.getInstance(application).positionsDatabaseDao
+
         val args: AddPositionFragmentArgs by navArgs()
         val positionName = args.positionName
         val viewModelFactory = AddPositionViewModelFactory(dataSource, positionName)
-
         viewModel = ViewModelProvider(this, viewModelFactory).get(AddPositionViewModel::class.java)
 
         binding.lifecycleOwner = this
+        binding.viewModel = viewModel
 
         viewModel.errorMessage.observe(viewLifecycleOwner) {
             showSnackbar(view, it)
