@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="input_chars_short">10</dimen>
+    <dimen name="input_first_margin_top">64dp</dimen>
+    <dimen name="input_margin_top">32dp</dimen>
+</resources>

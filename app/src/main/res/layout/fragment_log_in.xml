@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.lswitaj.moneymanager.authorisation.login.LogInViewModel" />
@@ -23,12 +22,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <!-- TODO(set autoFillHints) -->
                 <EditText
                     android:id="@+id/username_input"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="64dp"
-                    android:ems="10"
+                    style="@style/ShortInput"
+                    android:layout_marginTop="@dimen/input_first_margin_top"
                     android:hint="@string/username"
                     android:inputType="textPersonName"
                     android:text="@={viewModel.username}"
@@ -38,10 +36,7 @@
 
                 <EditText
                     android:id="@+id/password_input"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:ems="10"
+                    style="@style/ShortInput"
                     android:hint="@string/password"
                     android:inputType="textPassword"
                     android:text="@={viewModel.password}"
