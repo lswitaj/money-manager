@@ -4,9 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.lswitaj.moneymanager.data.database.Position
 import com.lswitaj.moneymanager.data.database.PositionsDatabaseDao
 import com.lswitaj.moneymanager.data.network.FinnhubApi
 import com.lswitaj.moneymanager.data.network.Symbol
+import com.lswitaj.moneymanager.utils.getLastClosePrice
 import kotlinx.coroutines.launch
 
 //TODO(export to string.xml and unify across the app to not invoke the same fun multiple times)
@@ -25,7 +27,7 @@ class SearchViewModel(
 
     //TODO(to have all symbols stored in the app maybe in some background job)
     private var allSymbols = emptyList<Symbol>()
-    lateinit var positionName: String
+    lateinit var positionToBeAdded: Position
 
     private val _searchableQueryResponse = MutableLiveData<List<Symbol>>()
     val searchableQueryResponse: LiveData<List<Symbol>>
@@ -65,9 +67,16 @@ class SearchViewModel(
             .filter { it.description.contains(query, true) }
     }
 
+    // position with only name and close price is send to the addPosition Fragment
+    // buyPrice and quantity are 0.0
     fun onNavigateToAddPosition(symbol: Symbol) {
-        positionName = symbol.symbol
-        _navigateToAddPosition.value = true
+        viewModelScope.launch {
+            positionToBeAdded = Position(
+                positionName = symbol.symbol,
+                lastClosePrice = getLastClosePrice(symbol.symbol).toBigDecimal().toPlainString()
+            )
+            _navigateToAddPosition.value = true
+        }
     }
 
     fun onNavigatedToAddPosition() {

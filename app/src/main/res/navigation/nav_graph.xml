@@ -56,8 +56,8 @@
             android:id="@+id/action_searchFragment_to_addPositionFragment"
             app:destination="@id/addPositionFragment">
             <argument
-                android:name="positionName"
-                app:argType="string" />
+                android:name="positionToBeAdded"
+                app:argType="com.lswitaj.moneymanager.data.database.Position" />
         </action>
     </fragment>
 
@@ -72,7 +72,7 @@
             app:popUpTo="@id/addPositionFragment"
             app:popUpToInclusive="true" />
         <argument
-            android:name="positionName"
-            app:argType="string" />
+            android:name="positionToBeAdded"
+            app:argType="com.lswitaj.moneymanager.data.database.Position" />
     </fragment>
 </navigation>

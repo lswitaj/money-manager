@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
 //TODO(to add a type - stock, crypto, etf, cash)
+//TODO(add the transaction timestamp and updateTime instead of the positionId that can differ between the app and backend)
 @Parcelize
 @Entity(tableName = "positions")
 data class Position(

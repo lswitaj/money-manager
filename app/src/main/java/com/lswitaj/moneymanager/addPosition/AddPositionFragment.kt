@@ -26,8 +26,8 @@ class AddPositionFragment : Fragment() {
         val dataSource = PositionsDatabase.getInstance(application).positionsDatabaseDao
 
         val args: AddPositionFragmentArgs by navArgs()
-        val positionName = args.positionName
-        val viewModelFactory = AddPositionViewModelFactory(dataSource, positionName)
+        val positionToBeAdded = args.positionToBeAdded
+        val viewModelFactory = AddPositionViewModelFactory(dataSource, positionToBeAdded)
         viewModel = ViewModelProvider(this, viewModelFactory).get(AddPositionViewModel::class.java)
 
         binding.lifecycleOwner = this

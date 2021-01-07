@@ -36,7 +36,7 @@ class SearchFragment : Fragment() {
             if (shouldNavigate) {
                 //TODO(to change positionName to the whole position instead as it was before)
                 this.findNavController()
-                    .navigate(SearchFragmentDirections.actionSearchFragmentToAddPositionFragment(viewModel.positionName))
+                    .navigate(SearchFragmentDirections.actionSearchFragmentToAddPositionFragment(viewModel.positionToBeAdded))
                 viewModel.onNavigatedToAddPosition()
             }
         })
