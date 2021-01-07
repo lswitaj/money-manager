@@ -76,7 +76,6 @@ class AddPositionViewModel(
             val parsePosition = ParseObject("Position")
             database.getLastPosition().let {
                 //TODO(to extract all put expressions to the class)
-                parsePosition.put("positionId", it.positionId)
                 parsePosition.put("positionName", it.positionName)
                 parsePosition.put("buyPrice", it.buyPrice)
                 parsePosition.put("quantity", it.quantity)
