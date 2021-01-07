@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.lswitaj.moneymanager.data.database.Position
 import com.lswitaj.moneymanager.data.database.PositionsDatabaseDao
 import com.lswitaj.moneymanager.search.NO_INTERNET_WHEN_ADDING_MESSAGE
-import com.lswitaj.moneymanager.utils.getLastClosePrice
 import com.lswitaj.moneymanager.utils.parseErrorFormatter
 import com.parse.ParseACL
 import com.parse.ParseObject
@@ -20,19 +19,12 @@ import kotlinx.coroutines.withContext
 //TODO(to change positionName to position here)
 class AddPositionViewModel(
     val database: PositionsDatabaseDao,
-    __positionName: String
+    positionToAdd: Position
 ) : ViewModel() {
-    private val _positionName = MutableLiveData<String>()
-    val positionName: LiveData<String>
-        get() = _positionName
-
     //TODO(add double -> string formatter)
-    val buyPrice = MutableLiveData("")
-    val quantity = MutableLiveData("")
-
-    private val _currentPrice = MutableLiveData<String>()
-    val currentPrice: LiveData<String>
-        get() = _currentPrice
+    private val _position = MutableLiveData<Position>()
+    val position: LiveData<Position>
+        get() = _position
 
     private val _navigateToSummary = MutableLiveData<Boolean>()
     val navigateToSummary: LiveData<Boolean>
@@ -43,10 +35,7 @@ class AddPositionViewModel(
         get() = _errorMessage
 
     init {
-        _positionName.value = __positionName
-        viewModelScope.launch {
-            _currentPrice.value = getLastClosePrice(_positionName.value!!).toBigDecimal().toPlainString()
-        }
+        _position.value = positionToAdd
     }
 
     //TODO(add validation similar to the SignUp)
@@ -60,10 +49,10 @@ class AddPositionViewModel(
                 Log.w("BUTTON", "ENTERED THE TRY")
                 database.addPosition(
                     Position(
-                        _positionName.value!!,
-                        buyPrice.value!!,
-                        quantity.value!!,
-                        _currentPrice.value!!
+                        _position.value!!.positionName,
+                        _position.value!!.buyPrice,
+                        _position.value!!.quantity,
+                        _position.value!!.lastClosePrice
                     )
                 )
                 addNewPositionToBackend()

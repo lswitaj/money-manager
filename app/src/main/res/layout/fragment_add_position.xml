@@ -31,7 +31,7 @@
                     android:ems="10"
                     android:inputType="textEmailAddress"
                     android:hint="@string/symbol_hint_example"
-                    android:text="@{viewModel.positionName}"
+                    android:text="@{viewModel.position.positionName}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -46,7 +46,7 @@
                     android:hint="@string/buy_price"
                     android:inputType="numberDecimal"
                     android:digits="0123456789."
-                    android:text="@={viewModel.buyPrice}"
+                    android:text="@={viewModel.position.buyPrice}"
                     app:layout_constraintEnd_toEndOf="@id/position_name"
                     app:layout_constraintStart_toStartOf="@id/position_name"
                     app:layout_constraintTop_toBottomOf="@id/position_name" />
@@ -60,7 +60,7 @@
                     android:hint="@string/quantity"
                     android:inputType="number"
                     android:digits="0123456789."
-                    android:text="@={viewModel.quantity}"
+                    android:text="@={viewModel.position.quantity}"
                     app:layout_constraintEnd_toEndOf="@id/position_name"
                     app:layout_constraintStart_toStartOf="@id/position_name"
                     app:layout_constraintTop_toBottomOf="@id/buy_price" />
@@ -73,7 +73,7 @@
                     android:ems="10"
                     android:inputType="textEmailAddress"
                     android:hint="@string/price_example"
-                    android:text="@{viewModel.currentPrice}"
+                    android:text="@{viewModel.position.lastClosePrice}"
                     app:layout_constraintEnd_toEndOf="@id/position_name"
                     app:layout_constraintStart_toStartOf="@id/position_name"
                     app:layout_constraintTop_toBottomOf="@id/quantity" />
