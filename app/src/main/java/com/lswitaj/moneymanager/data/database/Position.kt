@@ -5,6 +5,12 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.lswitaj.moneymanager.authorisation.signup.emailValidationError
+import com.lswitaj.moneymanager.authorisation.signup.passwordValidationError
+import com.lswitaj.moneymanager.authorisation.signup.usernameValidationError
+import com.lswitaj.moneymanager.utils.emailValidator
+import com.lswitaj.moneymanager.utils.passwordValidator
+import com.lswitaj.moneymanager.utils.usernameValidator
 import kotlinx.android.parcel.Parcelize
 
 //TODO(to add a type - stock, crypto, etf, cash)
@@ -22,4 +28,20 @@ data class Position(
     var lastClosePrice: String = "0.0"
 ) : Parcelable {
     @PrimaryKey(autoGenerate = true) var positionId: Long = 0L
+
+    constructor(position: Position) : this(
+        position.positionName,
+        position.buyPrice,
+        position.quantity,
+        position.lastClosePrice
+    )
+
+    //TODO(extract error messages to strings.xml)
+    fun isReady() : String {
+        return when {
+            positionName.isNullOrEmpty() -> "Position name can't be empty"
+            quantity.toDouble() <= 0.0 -> "Quantity has to be more than 0"
+            else -> ""
+        }
+    }
 }

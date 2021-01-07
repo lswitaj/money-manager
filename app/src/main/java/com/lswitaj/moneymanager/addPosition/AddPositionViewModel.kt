@@ -1,6 +1,5 @@
 package com.lswitaj.moneymanager.addPosition
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -40,26 +39,20 @@ class AddPositionViewModel(
 
     //TODO(add validation similar to the SignUp)
     fun onAddPositionButtonClicked() {
-        Log.w("BUTTON", "ADD POSITION BUTTON CLICKED")
         //TODO(symbol should be read somewhere here)
         viewModelScope.launch {
-            Log.w("BUTTON", "ENTERED THE COROUTINE")
             //TODO(to change price to double)
             try {
-                Log.w("BUTTON", "ENTERED THE TRY")
-                database.addPosition(
-                    Position(
-                        _position.value!!.positionName,
-                        _position.value!!.buyPrice,
-                        _position.value!!.quantity,
-                        _position.value!!.lastClosePrice
-                    )
-                )
+                val position = Position(_position.value!!)
+                val readyPositionErrorMessage = position.isReady()
+                if(readyPositionErrorMessage.isNotBlank()) {
+                    _errorMessage.value =  readyPositionErrorMessage
+                    return@launch
+                }
+                database.addPosition(position)
                 addNewPositionToBackend()
                 _navigateToSummary.value = true
             } catch (e: Exception) {
-                Log.w("BUTTON", "ENTERED THE CATCH")
-                Log.w("BUTTON", e.message!!)
                 if (e.message!!.contains("resolve host")) {
                     _errorMessage.value = NO_INTERNET_WHEN_ADDING_MESSAGE
                 } else {
@@ -70,9 +63,7 @@ class AddPositionViewModel(
     }
 
     private suspend fun addNewPositionToBackend() {
-        Log.w("BUTTON", "ENTERED THE BACKEND ADD")
         withContext(Dispatchers.IO) {
-            Log.w("BUTTON", "ENTERED THE COROUTINE")
             val parsePosition = ParseObject("Position")
             database.getLastPosition().let {
                 //TODO(to extract all put expressions to the class)
