@@ -4,10 +4,47 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="ShortInput" parent="Widget.AppCompat.EditText"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/input_margin_top"
-        android:ems="@dimen/input_chars_short" />
+    <style name="ShortText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margin_top</item>
+        <item name="android:ems">@integer/input_chars_short</item>
+    </style>
+
+    <style name="PrimaryButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margin_top</item>
+    </style>
+
+    <style name="SecondaryButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margin_top</item>
+    </style>
+
+    <style name="SmallPriceText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:maxLength">@integer/max_numbers</item>
+        <item name="android:ellipsize">end</item>
+        <item name="layout_constraintHorizontal_bias">0.0</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+    </style>
+
+    <style name="MenuText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/padding_extra_small</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="layout_constraintHorizontal_bias">0.0</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+        <item name="android:ellipsize">none</item>
+        <item name="android:scrollHorizontally">false</item>
+        <item name="android:inputType">textMultiLine</item>
+    </style>
 </resources>

@@ -25,10 +25,8 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/position_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="64dp"
-                    android:ems="10"
+                    style="@style/ShortText"
+                    android:layout_marginTop="@dimen/first_margin_top"
                     android:inputType="textEmailAddress"
                     android:hint="@string/symbol_hint_example"
                     android:text="@{viewModel.position.positionName}"
@@ -39,10 +37,7 @@
                 <!-- TODO(to specify and style number field) -->
                 <EditText
                     android:id="@+id/buy_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:ems="10"
+                    style="@style/ShortText"
                     android:hint="@string/buy_price"
                     android:inputType="numberDecimal"
                     android:digits="0123456789."
@@ -53,10 +48,7 @@
 
                 <EditText
                     android:id="@+id/quantity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:ems="10"
+                    style="@style/ShortText"
                     android:hint="@string/quantity"
                     android:inputType="number"
                     android:digits="0123456789."
@@ -67,10 +59,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/current_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:ems="10"
+                    style="@style/ShortText"
                     android:inputType="textEmailAddress"
                     android:hint="@string/price_example"
                     android:text="@{viewModel.position.lastClosePrice}"
@@ -80,10 +69,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/add_position_button"
-                    style="?attr/materialButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    style="@style/PrimaryButton"
                     android:onClick="@{() -> viewModel.onAddPositionButtonClicked()}"
                     android:text="@string/add_position"
                     app:layout_constraintEnd_toEndOf="@id/position_name"

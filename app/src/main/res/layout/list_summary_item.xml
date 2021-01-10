@@ -13,71 +13,50 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context="com.lswitaj.moneymanager.fragnent_search">
+        tools:context="com.lswitaj.moneymanager.fragnent_summary">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/name"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:padding="@dimen/padding_extra_small"
             android:text="@{position.positionName}"
             android:textAlignment="viewStart"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_medium"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/buy_price"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="OPR" />
+            tools:text="@string/position_name_example" />
 
         <!-- TODO(style those numbers) -->
         <!-- TODO(to add a nice price formatter) -->
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/buy_price"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            style="@style/SmallPriceText"
             android:text="@{position.buyPrice}"
-            android:textAlignment="textStart"
-            android:textSize="16sp"
-            android:maxLength="8"
-            android:ellipsize="end"
             app:layout_constraintBottom_toBottomOf="@id/name"
             app:layout_constraintEnd_toStartOf="@id/quantity"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@id/name"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="160.3" />
+            tools:text="@string/price_example" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/quantity"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            style="@style/SmallPriceText"
             android:text="@{position.quantity}"
-            android:textAlignment="textStart"
-            android:textSize="16sp"
-            android:maxLength="8"
-            android:ellipsize="end"
             app:layout_constraintBottom_toBottomOf="@id/name"
             app:layout_constraintEnd_toStartOf="@id/current_price"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@id/buy_price"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="4" />
+            tools:text="@string/quantity_example" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/current_price"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            style="@style/SmallPriceText"
             android:text="@{position.lastClosePrice}"
-            android:textAlignment="textStart"
-            android:textSize="16sp"
-            android:maxLength="8"
-            android:ellipsize="end"
             app:layout_constraintBottom_toBottomOf="@id/name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="194.36" />
+            app:layout_constraintStart_toEndOf="@id/quantity"
+            tools:text="@string/price_example" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

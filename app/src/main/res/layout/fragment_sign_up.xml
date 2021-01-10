@@ -24,10 +24,8 @@
 
                 <EditText
                     android:id="@+id/email_input"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="64dp"
-                    android:ems="10"
+                    style="@style/ShortText"
+                    android:layout_marginTop="@dimen/first_margin_top"
                     android:hint="@string/email_address"
                     android:inputType="textEmailAddress"
                     android:text="@={viewModel.email}"
@@ -37,10 +35,7 @@
 
                 <EditText
                     android:id="@+id/username_input"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:ems="10"
+                    style="@style/ShortText"
                     android:hint="@string/username"
                     android:inputType="textPersonName"
                     android:text="@={viewModel.username}"
@@ -50,10 +45,7 @@
 
                 <EditText
                     android:id="@+id/password_input"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:ems="10"
+                    style="@style/ShortText"
                     android:hint="@string/password"
                     android:inputType="textPassword"
                     android:text="@={viewModel.password}"
@@ -63,10 +55,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/sign_up_button"
-                    style="?attr/materialButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    style="@style/PrimaryButton"
                     android:onClick="@{() -> viewModel.onSignUpButtonClicked()}"
                     android:text="@string/sign_up"
                     app:layout_constraintEnd_toEndOf="@id/email_input"

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list_summary_header">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context="com.lswitaj.moneymanager.fragnent_summary">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/name"
+            style="@style/MenuText"
+            android:text="@string/position_name"
+            app:layout_constraintEnd_toStartOf="@id/buy_price"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/buy_price"
+            style="@style/MenuText"
+            android:text="@string/buy_price"
+            app:layout_constraintEnd_toStartOf="@id/quantity"
+            app:layout_constraintStart_toEndOf="@id/name" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/quantity"
+            style="@style/MenuText"
+            android:text="@string/quantity"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@id/current_price"
+            app:layout_constraintStart_toEndOf="@id/buy_price" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/current_price"
+            style="@style/MenuText"
+            android:text="@string/current_price"
+            app:layout_constraintStart_toEndOf="@id/quantity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
