@@ -1,5 +1,6 @@
 package com.lswitaj.moneymanager.search
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -73,7 +74,7 @@ class SearchViewModel(
         viewModelScope.launch {
             positionToBeAdded = Position(
                 positionName = symbol.symbol,
-                lastClosePrice = getLastClosePrice(symbol.symbol).toBigDecimal().toPlainString()
+                lastClosePrice = getLastClosePrice(symbol.symbol)
             )
             _navigateToAddPosition.value = true
         }

@@ -41,7 +41,7 @@
                     android:hint="@string/buy_price"
                     android:inputType="numberDecimal"
                     android:digits="0123456789."
-                    android:text="@={viewModel.position.buyPrice}"
+                    android:text="@={viewModel.buyPrice}"
                     app:layout_constraintEnd_toEndOf="@id/position_name"
                     app:layout_constraintStart_toStartOf="@id/position_name"
                     app:layout_constraintTop_toBottomOf="@id/position_name" />
@@ -52,7 +52,7 @@
                     android:hint="@string/quantity"
                     android:inputType="number"
                     android:digits="0123456789."
-                    android:text="@={viewModel.position.quantity}"
+                    android:text="@={viewModel.quantity}"
                     app:layout_constraintEnd_toEndOf="@id/position_name"
                     app:layout_constraintStart_toStartOf="@id/position_name"
                     app:layout_constraintTop_toBottomOf="@id/buy_price" />
@@ -62,7 +62,7 @@
                     style="@style/ShortText"
                     android:inputType="textEmailAddress"
                     android:hint="@string/price_example"
-                    android:text="@{viewModel.position.lastClosePrice}"
+                    android:text="@{viewModel.position.displayCurrentPrice()}"
                     app:layout_constraintEnd_toEndOf="@id/position_name"
                     app:layout_constraintStart_toStartOf="@id/position_name"
                     app:layout_constraintTop_toBottomOf="@id/quantity" />

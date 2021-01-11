@@ -14,16 +14,25 @@ import com.parse.ParseUser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.lang.Double.parseDouble
+
+const val MAX_NUMBER = 1000000000.0
+const val positionExceedsMaximumError =
+    "Buy price and quantity cannot exceed $MAX_NUMBER"
+const val positionValidationError =
+    "Buy price and quantity have to be non-negative decimal numbers."
 
 //TODO(to change positionName to position here)
 class AddPositionViewModel(
     val database: PositionsDatabaseDao,
     positionToAdd: Position
 ) : ViewModel() {
-    //TODO(add double -> string formatter)
     private val _position = MutableLiveData<Position>()
     val position: LiveData<Position>
         get() = _position
+
+    val buyPrice = MutableLiveData("0.0")
+    val quantity = MutableLiveData("0.0")
 
     private val _navigateToSummary = MutableLiveData<Boolean>()
     val navigateToSummary: LiveData<Boolean>
@@ -41,17 +50,13 @@ class AddPositionViewModel(
     fun onAddPositionButtonClicked() {
         //TODO(symbol should be read somewhere here)
         viewModelScope.launch {
-            //TODO(to change price to double)
             try {
-                val position = Position(_position.value!!)
-                val readyPositionErrorMessage = position.isReady()
-                if(readyPositionErrorMessage.isNotBlank()) {
-                    _errorMessage.value =  readyPositionErrorMessage
-                    return@launch
+                if (isPositionReady()) {
+                    val position = Position(_position.value!!)
+                    database.addPosition(position)
+                    addNewPositionToBackend()
+                    _navigateToSummary.value = true
                 }
-                database.addPosition(position)
-                addNewPositionToBackend()
-                _navigateToSummary.value = true
             } catch (e: Exception) {
                 if (e.message!!.contains("resolve host")) {
                     _errorMessage.value = NO_INTERNET_WHEN_ADDING_MESSAGE
@@ -83,5 +88,22 @@ class AddPositionViewModel(
     fun addNewPositionComplete() {
         _navigateToSummary.value = false
         //TODO(scroll down when adding a new position to see it)
+    }
+
+    private fun isPositionReady(): Boolean {
+        if (parseDouble(buyPrice.value!!) >= MAX_NUMBER ||
+            parseDouble(quantity.value!!) >= MAX_NUMBER
+        ) {
+            _errorMessage.value = positionExceedsMaximumError
+            return false
+        }
+            try {
+                _position.value?.buyPrice = parseDouble(buyPrice.value!!)
+                _position.value?.quantity = parseDouble(quantity.value!!)
+            } catch (e: Exception) {
+                _errorMessage.value = positionValidationError
+                return false
+            }
+        return true
     }
 }

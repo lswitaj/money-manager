@@ -16,7 +16,7 @@
 <!-- Summary -->
     <string name="add_a_new_position">Add a new position</string>
     <string name="logout">Log out</string>
-    <string name="price_example">100.0</string>
+    <string name="price_example">100.0$</string>
     <string name="quantity_example">10</string>
     <string name="position_name_example">AAPL</string>
 

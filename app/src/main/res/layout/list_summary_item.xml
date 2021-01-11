@@ -35,7 +35,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/buy_price"
             style="@style/SmallPriceText"
-            android:text="@{position.buyPrice}"
+            android:text="@{position.displayBuyPrice()}"
             app:layout_constraintBottom_toBottomOf="@id/name"
             app:layout_constraintEnd_toStartOf="@id/quantity"
             app:layout_constraintStart_toEndOf="@id/name"
@@ -44,7 +44,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/quantity"
             style="@style/SmallPriceText"
-            android:text="@{position.quantity}"
+            android:text="@{position.displayQuantity()}"
             app:layout_constraintBottom_toBottomOf="@id/name"
             app:layout_constraintEnd_toStartOf="@id/current_price"
             app:layout_constraintStart_toEndOf="@id/buy_price"
@@ -53,7 +53,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/current_price"
             style="@style/SmallPriceText"
-            android:text="@{position.lastClosePrice}"
+            android:text="@{position.displayCurrentPrice()}"
             app:layout_constraintBottom_toBottomOf="@id/name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/quantity"
