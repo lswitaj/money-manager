@@ -19,8 +19,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 //TODO(export to string.xml)
-const val NO_INTERNET_MESSAGE = "There's a problem to connect with a server. Please check " +
-        "your internet connection."
+const val NO_INTERNET_MESSAGE = "There's a problem to connect with a server connection. " +
+        "Please check your internet connection."
 
 //TODO(to be moved to the main activity)
 //const val LOGOUT_SUCCESS_MESSAGE = "Logout successful"
@@ -51,6 +51,7 @@ class SummaryViewModel(
         // e.g. walkthrough or welcome message)
         // if the user session doesn't exist redirect him to the log in screen
         if (ParseUser.getCurrentUser() != null) {
+            Log.w("int scope", Int.MAX_VALUE.toString())
             viewModelScope.launch {
                 refreshPositions()
                 updatePrices()
@@ -139,17 +140,24 @@ class SummaryViewModel(
     private suspend fun downloadDataFromServer(resultsList: MutableList<ParseObject>?) {
         viewModelScope.launch {
             resultsList?.forEach { result ->
-                val positionName = result.get("positionName").toString()
-                val buyPrice = result.get("buyPrice").toString()
-                val quantity = result.get("quantity").toString()
+                val positionName : String = result.get("positionName") as String
+                val buyPrice : Double = try {
+                    result.get("buyPrice") as Double
+                } catch (e: Exception) {
+                    (result.get("buyPrice") as Int).toDouble()
+                }
+                val quantity : Double = try {
+                    result.get("quantity") as Double
+                } catch (e: Exception) {
+                    (result.get("quantity") as Int).toDouble()
+                }
                 database.addPosition(
                     Position(
                         positionName,
                         buyPrice,
                         quantity,
-                        //TODO(change with double formatter)
-                        getLastClosePrice(positionName).toBigDecimal().toPlainString()
-                        //TODO(add profit ratio)
+                        getLastClosePrice(positionName)
+                        //TODO(add profit ratio and currency)
                     )
                 )
             }

@@ -5,13 +5,10 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.lswitaj.moneymanager.authorisation.signup.emailValidationError
-import com.lswitaj.moneymanager.authorisation.signup.passwordValidationError
-import com.lswitaj.moneymanager.authorisation.signup.usernameValidationError
-import com.lswitaj.moneymanager.utils.emailValidator
-import com.lswitaj.moneymanager.utils.passwordValidator
-import com.lswitaj.moneymanager.utils.usernameValidator
+import com.lswitaj.moneymanager.utils.displayPrice
+import com.lswitaj.moneymanager.utils.formatDouble
 import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.IgnoredOnParcel
 
 //TODO(to add a type - stock, crypto, etf, cash)
 //TODO(add the transaction timestamp and updateTime instead of the positionId that can differ between the app and backend)
@@ -20,13 +17,16 @@ import kotlinx.android.parcel.Parcelize
 data class Position(
     @ColumnInfo(name = "positionName")
     var positionName: String,
+    //TODO(to add currency)
+    //var currency: String = "USD",
 
     //TODO(add a timestamp so that the app knows if the position price should/not be updated)
-    //TODO(to change the type to Double and add a text formatter)
-    var buyPrice: String = "0.0",
-    var quantity: String = "0.0",
-    var lastClosePrice: String = "0.0"
+    //TODO(to rethink using BigDecimal instead of the Double)
+    var buyPrice: Double = 0.0,
+    var quantity: Double = 0.0,
+    var lastClosePrice: Double = 0.0
 ) : Parcelable {
+    @IgnoredOnParcel
     @PrimaryKey(autoGenerate = true) var positionId: Long = 0L
 
     constructor(position: Position) : this(
@@ -36,12 +36,8 @@ data class Position(
         position.lastClosePrice
     )
 
-    //TODO(extract error messages to strings.xml)
-    fun isReady() : String {
-        return when {
-            positionName.isNullOrEmpty() -> "Position name can't be empty"
-            quantity.toDouble() <= 0.0 -> "Quantity has to be more than 0"
-            else -> ""
-        }
-    }
+    //TODO(hardcoded currency to be removed)
+    fun displayBuyPrice() : String = displayPrice(buyPrice, "USD")
+    fun displayQuantity() : String = formatDouble(quantity)
+    fun displayCurrentPrice() : String = displayPrice(lastClosePrice, "USD")
 }

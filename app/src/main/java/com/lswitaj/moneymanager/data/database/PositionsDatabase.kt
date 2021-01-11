@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 //TODO(use a repository pattern)
 //TODO(set exportSchema to true later on)
-@Database(entities = [Position::class], version = 1, exportSchema = false)
+@Database(entities = [Position::class], version = 2, exportSchema = false)
 abstract class PositionsDatabase : RoomDatabase() {
 
     abstract val positionsDatabaseDao: PositionsDatabaseDao

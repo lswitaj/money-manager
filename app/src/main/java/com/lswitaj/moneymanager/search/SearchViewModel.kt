@@ -1,5 +1,6 @@
 package com.lswitaj.moneymanager.search
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,8 +13,8 @@ import com.lswitaj.moneymanager.utils.getLastClosePrice
 import kotlinx.coroutines.launch
 
 //TODO(export to string.xml and unify across the app to not invoke the same fun multiple times)
-const val NO_INTERNET_MESSAGE = "There's a problem to connect with a server. Please check " +
-        "your internet connection."
+const val NO_INTERNET_MESSAGE = "There's a problem to connect with a server connection. " +
+        "Please check your internet connection."
 const val NO_INTERNET_WHEN_ADDING_MESSAGE = "Position adding failed. Please check " +
         "your internet connection."
 
@@ -73,7 +74,7 @@ class SearchViewModel(
         viewModelScope.launch {
             positionToBeAdded = Position(
                 positionName = symbol.symbol,
-                lastClosePrice = getLastClosePrice(symbol.symbol).toBigDecimal().toPlainString()
+                lastClosePrice = getLastClosePrice(symbol.symbol)
             )
             _navigateToAddPosition.value = true
         }
