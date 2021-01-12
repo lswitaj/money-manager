@@ -26,6 +26,8 @@ class SearchViewModel(
         getAllSymbols()
     }
 
+    //TODO(to consider using SymbolLookup endpoint:
+    // https://finnhub.io/docs/api#symbol-search)
     //TODO(to have all symbols stored in the app maybe in some background job)
     private var allSymbols = emptyList<Symbol>()
     lateinit var positionToBeAdded: Position

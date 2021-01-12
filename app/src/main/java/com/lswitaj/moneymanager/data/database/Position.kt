@@ -5,7 +5,8 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.lswitaj.moneymanager.utils.displayPrice
+import com.lswitaj.moneymanager.utils.countProportion
+import com.lswitaj.moneymanager.utils.formatPrice
 import com.lswitaj.moneymanager.utils.formatDouble
 import kotlinx.android.parcel.Parcelize
 import kotlinx.parcelize.IgnoredOnParcel
@@ -37,7 +38,8 @@ data class Position(
     )
 
     //TODO(hardcoded currency to be removed)
-    fun displayBuyPrice() : String = displayPrice(buyPrice, "USD")
+    fun displayBuyPrice() : String = formatPrice(buyPrice, "USD")
     fun displayQuantity() : String = formatDouble(quantity)
-    fun displayCurrentPrice() : String = displayPrice(lastClosePrice, "USD")
+    fun displayCurrentPrice() : String = formatPrice(lastClosePrice, "USD")
+    fun displayProfitRation() : String = countProportion(buyPrice, lastClosePrice)
 }

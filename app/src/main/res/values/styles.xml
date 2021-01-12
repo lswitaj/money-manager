@@ -30,7 +30,7 @@
         <item name="android:textSize">@dimen/text_small</item>
         <item name="android:maxLength">@integer/max_numbers</item>
         <item name="android:ellipsize">end</item>
-        <item name="layout_constraintHorizontal_bias">0.0</item>
+        <item name="layout_constraintHorizontal_bias">0.5</item>
         <item name="layout_constraintTop_toTopOf">parent</item>
     </style>
 
@@ -41,10 +41,22 @@
         <item name="android:textAlignment">center</item>
         <item name="android:textSize">@dimen/text_small</item>
         <item name="layout_constraintHorizontal_bias">0.0</item>
+        <item name="layout_constraintVertical_bias">0.0</item>
         <item name="layout_constraintBottom_toBottomOf">parent</item>
         <item name="layout_constraintTop_toTopOf">parent</item>
         <item name="android:ellipsize">none</item>
         <item name="android:scrollHorizontally">false</item>
         <item name="android:inputType">textMultiLine</item>
+    </style>
+
+    <style name="DividerPrimary">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/line_size</item>
+        <item name="android:background">@color/material_on_surface_emphasis_high_type</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+    </style>
+
+    <style name="DividerSecondary" parent="DividerPrimary">
+        <item name="android:background">@color/material_on_surface_stroke</item>
     </style>
 </resources>
