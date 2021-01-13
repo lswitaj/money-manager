@@ -30,9 +30,10 @@
                     android:layout_height="wrap_content"
                     android:paddingStart="@dimen/padding_small"
                     android:paddingEnd="@dimen/padding_small"
-                    tools:header="@layout/list_summary_header"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/summary_list" />
+                    app:layout_constraintBottom_toTopOf="@id/summary_list"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/summary_list"

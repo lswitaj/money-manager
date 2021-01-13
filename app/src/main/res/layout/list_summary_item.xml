@@ -5,7 +5,6 @@
     android:id="@+id/list_summary_item">
 
     <data>
-
         <variable
             name="position"
             type="com.lswitaj.moneymanager.data.database.Position" />
@@ -20,13 +19,13 @@
             android:id="@+id/name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="@dimen/padding_extra_small"
             android:text="@{position.positionName}"
             android:textAlignment="viewStart"
             android:textSize="@dimen/text_medium"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/quantity"
             app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/position_name_example" />
@@ -38,6 +37,7 @@
             app:layout_constraintBottom_toBottomOf="@id/name"
             app:layout_constraintEnd_toStartOf="@id/profit"
             app:layout_constraintStart_toEndOf="@id/name"
+            app:layout_constraintHorizontal_weight="1"
             tools:text="@string/quantity_example" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -47,15 +47,18 @@
             app:layout_constraintBottom_toBottomOf="@id/name"
             app:layout_constraintEnd_toStartOf="@id/prices"
             app:layout_constraintStart_toEndOf="@id/quantity"
+            app:layout_constraintHorizontal_weight="1"
             tools:text="@string/profit_example" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/prices"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintStart_toEndOf="@id/profit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/current_price"
@@ -63,6 +66,7 @@
                 android:text="@{position.displayCurrentPrice()}"
                 app:layout_constraintBottom_toTopOf="@id/buy_price"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 tools:text="@string/price_example" />
 
             <com.google.android.material.textview.MaterialTextView

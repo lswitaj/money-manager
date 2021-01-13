@@ -11,28 +11,28 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/name"
-            style="@style/MenuText"
+            style="@style/TableHeaderText"
             android:text="@string/position_name"
             app:layout_constraintEnd_toStartOf="@id/quantity"
             app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/quantity"
-            style="@style/MenuText"
+            style="@style/TableHeaderText"
             android:text="@string/quantity"
             app:layout_constraintEnd_toStartOf="@id/profit"
             app:layout_constraintStart_toEndOf="@id/name" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/profit"
-            style="@style/MenuText"
+            style="@style/TableHeaderText"
             android:text="@string/profit"
             app:layout_constraintEnd_toStartOf="@id/prices"
             app:layout_constraintStart_toEndOf="@id/quantity" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/prices"
-            style="@style/MenuText"
+            style="@style/TableHeaderText"
             android:text="@string/prices"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

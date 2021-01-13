@@ -97,13 +97,13 @@ class AddPositionViewModel(
             _errorMessage.value = positionExceedsMaximumError
             return false
         }
-            try {
-                _position.value?.buyPrice = parseDouble(buyPrice.value!!)
-                _position.value?.quantity = parseDouble(quantity.value!!)
-            } catch (e: Exception) {
-                _errorMessage.value = positionValidationError
-                return false
-            }
+        try {
+            _position.value?.buyPrice = parseDouble(buyPrice.value!!)
+            _position.value?.quantity = parseDouble(quantity.value!!)
+        } catch (e: Exception) {
+            _errorMessage.value = positionValidationError
+            return false
+        }
         return true
     }
 }

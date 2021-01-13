@@ -26,7 +26,7 @@
     <style name="SmallPriceText">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:textAlignment">center</item>
+        <item name="android:textAlignment">textStart</item>
         <item name="android:textSize">@dimen/text_small</item>
         <item name="android:maxLength">@integer/max_numbers</item>
         <item name="android:ellipsize">end</item>
@@ -34,7 +34,7 @@
         <item name="layout_constraintTop_toTopOf">parent</item>
     </style>
 
-    <style name="MenuText">
+    <style name="TableHeaderText">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">@dimen/padding_extra_small</item>
@@ -44,6 +44,7 @@
         <item name="layout_constraintVertical_bias">0.0</item>
         <item name="layout_constraintBottom_toBottomOf">parent</item>
         <item name="layout_constraintTop_toTopOf">parent</item>
+        <item name="layout_constraintHorizontal_weight">1</item>
         <item name="android:ellipsize">none</item>
         <item name="android:scrollHorizontally">false</item>
         <item name="android:inputType">textMultiLine</item>

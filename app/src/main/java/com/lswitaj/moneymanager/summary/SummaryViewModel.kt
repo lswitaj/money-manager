@@ -46,12 +46,13 @@ class SummaryViewModel(
     val navigateToLogin: LiveData<Boolean>
         get() = _navigateToLogin
 
+    //TODO(check what happens if the user X will log out and user Y will log in, will user Y
+    // have access to user's X data?)
     init {
         //TODO(to consider adding some special action if the user isNew == true,
         // e.g. walkthrough or welcome message)
         // if the user session doesn't exist redirect him to the log in screen
         if (ParseUser.getCurrentUser() != null) {
-            Log.w("int scope", Int.MAX_VALUE.toString())
             viewModelScope.launch {
                 refreshPositions()
                 updatePrices()

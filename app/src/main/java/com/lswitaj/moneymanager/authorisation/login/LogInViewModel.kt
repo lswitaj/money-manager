@@ -28,10 +28,9 @@ class LogInViewModel() : ViewModel() {
     fun onLogInButtonClicked() {
         val username = usernameFormatter(username.value)
         val password = password.value
-
+        //TODO(to display email/username in sidebar)
         ParseUser.logInInBackground(username, password) { user, e ->
             if (user != null) {
-                //TODO(to display email/username in sidebar)
                 _navigateToSummary.value = true
             } else {
                 _errorMessage.value = parseErrorFormatter(e)
