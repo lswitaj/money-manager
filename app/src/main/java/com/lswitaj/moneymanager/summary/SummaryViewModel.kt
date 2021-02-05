@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.room.ColumnInfo
+import androidx.room.Database
+import com.google.android.material.internal.ContextUtils.getActivity
 import com.lswitaj.moneymanager.data.database.Position
 import com.lswitaj.moneymanager.data.database.PositionsDatabaseDao
 import com.lswitaj.moneymanager.utils.getLastClosePrice
@@ -46,8 +48,6 @@ class SummaryViewModel(
     val navigateToLogin: LiveData<Boolean>
         get() = _navigateToLogin
 
-    //TODO(check what happens if the user X will log out and user Y will log in, will user Y
-    // have access to user's X data?)
     init {
         //TODO(to consider adding some special action if the user isNew == true,
         // e.g. walkthrough or welcome message)
@@ -105,8 +105,9 @@ class SummaryViewModel(
             ParseUser.logOut()
             if (ParseUser.getCurrentUser() == null) {
                 //TODO(to make some general error messages - maybe on the activity level - it'll be
-                // not shown if the user is redirected to the login screen)
-                //_errorMessage.value = LOGOUT_SUCCESS_MESSAGE
+                viewModelScope.launch {
+                    database.clearDatabase()
+                }
                 _navigateToLogin.value = true
             }
         } catch (e: Exception) {
