@@ -26,6 +26,8 @@ class SearchViewModel(
         getAllSymbols()
     }
 
+    //TODO(to consider using SymbolLookup endpoint:
+    // https://finnhub.io/docs/api#symbol-search)
     //TODO(to have all symbols stored in the app maybe in some background job)
     private var allSymbols = emptyList<Symbol>()
     lateinit var positionToBeAdded: Position
@@ -56,7 +58,6 @@ class SearchViewModel(
                 if (e.message!!.contains("resolve host")) {
                     _errorMessage.postValue(NO_INTERNET_MESSAGE)
                 } else {
-                    //TODO(to add this part to the final document as it describes some async stuff)
                     _errorMessage.postValue(e.message)
                 }
             }

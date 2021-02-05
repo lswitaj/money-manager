@@ -40,8 +40,8 @@ class SummaryListAdapter() : ListAdapter<Position, SummaryListViewHolder>(DiffCa
         return SummaryListViewHolder.from(parent)
     }
 
-    override fun onBindViewHolder(holder: SummaryListViewHolder, position: Int) {
-        val position = getItem(position)
+    override fun onBindViewHolder(holder: SummaryListViewHolder, _position: Int) {
+        val position = getItem(_position)
         holder.bind(position)
     }
 }

@@ -32,7 +32,7 @@ const val AUTH_ERROR_MESSAGE = "Authorisation error, please log in again."
 class SummaryViewModel(
     val database: PositionsDatabaseDao
 ) : ViewModel() {
-    var allPositions: LiveData<List<Position>> = database.getAllPositions()
+    val allPositions: LiveData<List<Position>> = database.getAllPositions()
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String>
@@ -46,12 +46,13 @@ class SummaryViewModel(
     val navigateToLogin: LiveData<Boolean>
         get() = _navigateToLogin
 
+    //TODO(check what happens if the user X will log out and user Y will log in, will user Y
+    // have access to user's X data?)
     init {
         //TODO(to consider adding some special action if the user isNew == true,
         // e.g. walkthrough or welcome message)
         // if the user session doesn't exist redirect him to the log in screen
         if (ParseUser.getCurrentUser() != null) {
-            Log.w("int scope", Int.MAX_VALUE.toString())
             viewModelScope.launch {
                 refreshPositions()
                 updatePrices()
@@ -91,13 +92,11 @@ class SummaryViewModel(
                     if (e.message!!.contains("resolve host")) {
                         _errorMessage.postValue(NO_INTERNET_MESSAGE)
                     } else {
-                        //TODO(to add this part to the final document as it describes some async stuff)
                         _errorMessage.postValue(e.message)
                     }
                 }
             }
         }
-        allPositions = database.getAllPositions()
     }
 
     fun logOut() {
@@ -140,17 +139,9 @@ class SummaryViewModel(
     private suspend fun downloadDataFromServer(resultsList: MutableList<ParseObject>?) {
         viewModelScope.launch {
             resultsList?.forEach { result ->
-                val positionName : String = result.get("positionName") as String
-                val buyPrice : Double = try {
-                    result.get("buyPrice") as Double
-                } catch (e: Exception) {
-                    (result.get("buyPrice") as Int).toDouble()
-                }
-                val quantity : Double = try {
-                    result.get("quantity") as Double
-                } catch (e: Exception) {
-                    (result.get("quantity") as Int).toDouble()
-                }
+                val positionName = result.getString("positionName")
+                val buyPrice = result.getDouble("buyPrice")
+                val quantity = result.getDouble("quantity")
                 database.addPosition(
                     Position(
                         positionName,
