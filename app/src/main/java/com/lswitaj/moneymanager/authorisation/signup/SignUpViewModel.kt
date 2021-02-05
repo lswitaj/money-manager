@@ -33,26 +33,25 @@ class SignUpViewModel() : ViewModel() {
         val password = password.value
         val email = emailFormatter(email.value)
 
-        val user = ParseUser()
-
-        user.username = username
-        user.email = email
-        user.setPassword(password)
-
         when {
-            !emailValidator(user.email) -> _errorMessage.value = emailValidationError
-            !usernameValidator(user.username) -> _errorMessage.value = usernameValidationError
+            !emailValidator(email) -> _errorMessage.value = emailValidationError
+            !usernameValidator(username) -> _errorMessage.value = usernameValidationError
             !passwordValidator(password) -> _errorMessage.value = passwordValidationError
             else -> signUpReady = true
         }
 
-        if(signUpReady) {
+        if (signUpReady) {
+            val user = ParseUser()
+            user.username = username
+            user.email = email
+            user.setPassword(password)
             user.signUpInBackground { e ->
-            if (e == null) {
-                _navigateToSummary.value = true
-            } else {
-                _errorMessage.value = parseErrorFormatter(e)
-            }}
+                if (e == null) {
+                    _navigateToSummary.value = true
+                } else {
+                    _errorMessage.value = parseErrorFormatter(e)
+                }
+            }
         }
     }
 
