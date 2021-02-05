@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list_summary_header">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context="com.lswitaj.moneymanager.fragnent_summary">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/name"
+            style="@style/TableHeaderText"
+            android:text="@string/position_name"
+            app:layout_constraintEnd_toStartOf="@id/quantity"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/quantity"
+            style="@style/TableHeaderText"
+            android:text="@string/quantity"
+            app:layout_constraintEnd_toStartOf="@id/profit"
+            app:layout_constraintStart_toEndOf="@id/name" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/profit"
+            style="@style/TableHeaderText"
+            android:text="@string/profit"
+            app:layout_constraintEnd_toStartOf="@id/prices"
+            app:layout_constraintStart_toEndOf="@id/quantity" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/prices"
+            style="@style/TableHeaderText"
+            android:text="@string/prices"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- TODO(make dividers working) -->
+        <!--        <View-->
+        <!--            android:id="@+id/divider"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            style="@style/DividerPrimary" />-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

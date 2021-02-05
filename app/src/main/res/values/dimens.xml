@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="input_chars_short">10</integer>
+    <integer name="max_numbers">8</integer>
+    <dimen name="text_field_medium">96dp</dimen>
+    <dimen name="first_margin_top">64dp</dimen>
+    <dimen name="margin_top">32dp</dimen>
+    <dimen name="padding_small">16dp</dimen>
+    <dimen name="text_extra_small">12sp</dimen>
+    <dimen name="text_small">16sp</dimen>
+    <dimen name="text_medium">20sp</dimen>
+    <dimen name="padding_extra_small">8dp</dimen>
+    <dimen name="line_size">1px</dimen>
+</resources>

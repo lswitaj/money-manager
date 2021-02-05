@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.lswitaj.moneymanager.authorisation.login.LogInViewModel" />
@@ -23,12 +22,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <!-- TODO(set autoFillHints) -->
                 <EditText
                     android:id="@+id/username_input"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="64dp"
-                    android:ems="10"
+                    style="@style/ShortText"
+                    android:layout_marginTop="@dimen/first_margin_top"
                     android:hint="@string/username"
                     android:inputType="textPersonName"
                     android:text="@={viewModel.username}"
@@ -38,10 +36,7 @@
 
                 <EditText
                     android:id="@+id/password_input"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:ems="10"
+                    style="@style/ShortText"
                     android:hint="@string/password"
                     android:inputType="textPassword"
                     android:text="@={viewModel.password}"
@@ -51,10 +46,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/log_in_button"
-                    style="?attr/materialButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="36dp"
+                    style="@style/PrimaryButton"
                     android:onClick="@{() -> viewModel.onLogInButtonClicked()}"
                     android:text="@string/log_in"
                     app:layout_constraintEnd_toEndOf="@id/username_input"
@@ -62,10 +54,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/sign_up_button"
-                    style="?attr/materialButtonOutlinedStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="36dp"
+                    style="@style/SecondaryButton"
                     android:onClick="@{() -> viewModel.onSignUpButtonClicked()}"
                     android:text="@string/sign_up"
                     app:layout_constraintStart_toStartOf="@id/username_input"

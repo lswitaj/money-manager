@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import com.lswitaj.moneymanager.R
-import com.lswitaj.moneymanager.data.database.SymbolsDatabase
+import com.lswitaj.moneymanager.data.database.PositionsDatabase
 import com.lswitaj.moneymanager.databinding.FragmentSummaryBinding
 import com.lswitaj.moneymanager.utils.showSnackbar
 
@@ -22,7 +22,7 @@ class SummaryFragment : Fragment() {
         val binding = FragmentSummaryBinding.inflate(inflater)
 
         val application = requireNotNull(this.activity).application
-        val dataSource = SymbolsDatabase.getInstance(application).symbolsDatabaseDao
+        val dataSource = PositionsDatabase.getInstance(application).positionsDatabaseDao
         val viewModelFactory = SummaryViewModelFactory(dataSource)
         viewModel = ViewModelProvider(this, viewModelFactory).get(SummaryViewModel::class.java)
 

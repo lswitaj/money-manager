@@ -6,43 +6,85 @@
 
     <data>
         <variable
-            name="symbolOverview"
-            type="com.lswitaj.moneymanager.data.database.SymbolsOverview" />
+            name="position"
+            type="com.lswitaj.moneymanager.data.database.Position" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context="com.lswitaj.moneymanager.fragnent_search">
+        tools:context="com.lswitaj.moneymanager.fragnent_summary">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="@{symbolOverview.symbolName}"
+            android:text="@{position.positionName}"
             android:textAlignment="viewStart"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_medium"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/quantity"
             app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="OPR" />
+            tools:text="@string/position_name_example" />
 
-        <!-- TODO(to add a nice price formatter) -->
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/price"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/quantity"
+            style="@style/SmallPriceText"
+            android:text="@{position.displayQuantity()}"
+            app:layout_constraintBottom_toBottomOf="@id/name"
+            app:layout_constraintEnd_toStartOf="@id/profit"
+            app:layout_constraintStart_toEndOf="@id/name"
+            app:layout_constraintHorizontal_weight="1"
+            tools:text="@string/quantity_example" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/profit"
+            style="@style/SmallPriceText"
+            android:text="@{position.displayProfitRation()}"
+            app:layout_constraintBottom_toBottomOf="@id/name"
+            app:layout_constraintEnd_toStartOf="@id/prices"
+            app:layout_constraintStart_toEndOf="@id/quantity"
+            app:layout_constraintHorizontal_weight="1"
+            tools:text="@string/profit_example" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/prices"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:padding="16dp"
-            android:text="@{symbolOverview.lastClosePrice}"
-            android:textAlignment="viewEnd"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="194.36" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/profit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/current_price"
+                style="@style/SmallPriceText"
+                android:text="@{position.displayCurrentPrice()}"
+                app:layout_constraintBottom_toTopOf="@id/buy_price"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="@string/price_example" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/buy_price"
+                style="@style/SmallPriceText"
+                android:text="@{position.displayBuyPrice()}"
+                android:textSize="@dimen/text_extra_small"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/current_price"
+                tools:text="@string/price_example" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--        <View-->
+        <!--            android:id="@+id/divider"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            style="@style/DividerSecondary" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

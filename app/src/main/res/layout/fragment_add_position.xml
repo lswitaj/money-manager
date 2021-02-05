@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.lswitaj.moneymanager.addPosition.AddPositionViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- TODO(to add a buy date) -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/position_name"
+                    style="@style/ShortText"
+                    android:layout_marginTop="@dimen/first_margin_top"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/symbol_hint_example"
+                    android:text="@{viewModel.position.positionName}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- TODO(to specify and style number field) -->
+                <EditText
+                    android:id="@+id/buy_price"
+                    style="@style/ShortText"
+                    android:hint="@string/buy_price"
+                    android:inputType="numberDecimal"
+                    android:digits="0123456789."
+                    android:text="@={viewModel.buyPrice}"
+                    app:layout_constraintEnd_toEndOf="@id/position_name"
+                    app:layout_constraintStart_toStartOf="@id/position_name"
+                    app:layout_constraintTop_toBottomOf="@id/position_name" />
+
+                <EditText
+                    android:id="@+id/quantity"
+                    style="@style/ShortText"
+                    android:hint="@string/quantity"
+                    android:inputType="number"
+                    android:digits="0123456789."
+                    android:text="@={viewModel.quantity}"
+                    app:layout_constraintEnd_toEndOf="@id/position_name"
+                    app:layout_constraintStart_toStartOf="@id/position_name"
+                    app:layout_constraintTop_toBottomOf="@id/buy_price" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/current_price"
+                    style="@style/ShortText"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/price_example"
+                    android:text="@{viewModel.position.displayCurrentPrice()}"
+                    app:layout_constraintEnd_toEndOf="@id/position_name"
+                    app:layout_constraintStart_toStartOf="@id/position_name"
+                    app:layout_constraintTop_toBottomOf="@id/quantity" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/add_position_button"
+                    style="@style/PrimaryButton"
+                    android:onClick="@{() -> viewModel.onAddPositionButtonClicked()}"
+                    android:text="@string/add_position"
+                    app:layout_constraintEnd_toEndOf="@id/position_name"
+                    app:layout_constraintStart_toStartOf="@id/position_name"
+                    app:layout_constraintTop_toBottomOf="@id/current_price" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
