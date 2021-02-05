@@ -2,6 +2,7 @@ package com.lswitaj.moneymanager.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 
@@ -26,4 +27,7 @@ interface PositionsDatabaseDao {
 
     @Query("SELECT COUNT(*) AS PositionsCount FROM positions")
     fun countPositions(): Int
+
+    @Query("DELETE FROM positions")
+    suspend fun clearDatabase()
 }

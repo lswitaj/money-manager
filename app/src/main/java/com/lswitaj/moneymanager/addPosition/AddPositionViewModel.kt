@@ -31,8 +31,8 @@ class AddPositionViewModel(
     val position: LiveData<Position>
         get() = _position
 
-    val buyPrice = MutableLiveData("0.0")
-    val quantity = MutableLiveData("0.0")
+    val buyPrice = MutableLiveData("")
+    val quantity = MutableLiveData("")
 
     private val _navigateToSummary = MutableLiveData<Boolean>()
     val navigateToSummary: LiveData<Boolean>
