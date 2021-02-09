@@ -1,13 +1,9 @@
 package com.lswitaj.moneymanager.summary
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.room.ColumnInfo
-import androidx.room.Database
-import com.google.android.material.internal.ContextUtils.getActivity
 import com.lswitaj.moneymanager.data.database.Position
 import com.lswitaj.moneymanager.data.database.PositionsDatabaseDao
 import com.lswitaj.moneymanager.utils.getLastClosePrice
@@ -153,6 +149,12 @@ class SummaryViewModel(
                     )
                 )
             }
+        }
+    }
+
+    fun onPositionSwiped(position: Position) {
+        viewModelScope.launch {
+            database.removePosition(position.positionId)
         }
     }
 }

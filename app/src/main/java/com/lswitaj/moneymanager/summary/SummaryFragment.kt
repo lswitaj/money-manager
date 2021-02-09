@@ -1,18 +1,18 @@
 package com.lswitaj.moneymanager.summary
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
-import com.lswitaj.moneymanager.MainActivity
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.lswitaj.moneymanager.R
 import com.lswitaj.moneymanager.data.database.PositionsDatabase
 import com.lswitaj.moneymanager.databinding.FragmentSummaryBinding
 import com.lswitaj.moneymanager.utils.showSnackbar
-import kotlin.coroutines.coroutineContext
 
 
 class SummaryFragment : Fragment() {
@@ -27,12 +27,37 @@ class SummaryFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val dataSource = PositionsDatabase.getInstance(application).positionsDatabaseDao
+        val summaryAdapter = SummaryListAdapter()
         val viewModelFactory = SummaryViewModelFactory(dataSource)
         viewModel = ViewModelProvider(this, viewModelFactory).get(SummaryViewModel::class.java)
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        binding.summaryList.adapter = SummaryListAdapter()
+        binding.summaryList.adapter = summaryAdapter
+
+        binding.apply {
+            summaryList.apply {
+                adapter = summaryAdapter
+                layoutManager = LinearLayoutManager(requireContext())
+                setHasFixedSize(true)
+            }
+
+            ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+                    return false
+                }
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    val position = summaryAdapter.currentList[viewHolder.adapterPosition]
+                    viewModel!!.onPositionSwiped(position)
+                }
+            }).attachToRecyclerView(summaryList)
+        }
 
         viewModel.navigateToSearch.observe(viewLifecycleOwner, { shouldNavigate ->
             if (shouldNavigate) {
