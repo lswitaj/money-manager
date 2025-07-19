@@ -1,45 +1,98 @@
-**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
+# 📈 StockTracker – Android App for Monitoring US Stock Positions
 
-When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
-
-*We recommend that you open this README in another tab as you perform the tasks below. You can [watch our video](https://youtu.be/0ocf7u76WSo) for a full demo of all the steps in this tutorial. Open the video in a new tab to avoid leaving Bitbucket.*
+StockTracker is an Android portfolio app enabling users to monitor their investment positions on the US stock market. Developed as part of an engineering thesis at the Warsaw University of Technology, it leverages cloud sync, modern Android architecture, and reliable market data APIs.
 
 ---
 
-## Edit a file
+## 📱 Features
 
-You’ll start by editing this README file to learn how to edit a file in Bitbucket.
-
-1. Click **Source** on the left side.
-2. Click the README.md link from the list of files.
-3. Click the **Edit** button.
-4. Delete the following text: *Delete this line to make a change to the README from Bitbucket.*
-5. After making your change, click **Commit** and then **Commit** again in the dialog. The commit page will open and you’ll see the change you just made.
-6. Go back to the **Source** page.
-
----
-
-## Create a file
-
-Next, you’ll add a new file to this repository.
-
-1. Click the **New file** button at the top of the **Source** page.
-2. Give the file a filename of **contributors.txt**.
-3. Enter your name in the empty file space.
-4. Click **Commit** and then **Commit** again in the dialog.
-5. Go back to the **Source** page.
-
-Before you move on, go ahead and explore the repository. You've already seen the **Source** page, but check out the **Commits**, **Branches**, and **Settings** pages.
+- User registration and login (Back4App / Parse)
+- Add positions for US stock market assets
+- Store position parameters: ticker symbol, purchase price, number of shares
+- Fetch current stock prices (Finnhub API)
+- Calculate and display profit/loss per position
+- Cloud data sync – access your portfolio from any Android device
+- Support for multiple positions in the same asset
 
 ---
 
-## Clone a repository
+## 🧰 Technologies
 
-Use these steps to clone from SourceTree, our client for using the repository command-line free. Cloning allows you to work on your files locally. If you don't yet have SourceTree, [download and install first](https://www.sourcetreeapp.com/). If you prefer to clone from the command line, see [Clone a repository](https://confluence.atlassian.com/x/4whODQ).
+| Component                   | Technology                        |
+|-----------------------------|-----------------------------------|
+| Programming Language        | Kotlin                            |
+| UI                          | Material Design             |
+| Architecture                | MVVM                              |
+| Backend as a Service (BaaS) | Back4App (Parse-based)            |
+| Market Data API             | Finnhub API                       |
+| Async                       | Kotlin Coroutines                 |
+| Local Database              | Room (SQLite + LiveData)          |
+| API Communication           | Retrofit + Moshi                  |
 
-1. You’ll see the clone button under the **Source** heading. Click that button.
-2. Now click **Check out in SourceTree**. You may need to create a SourceTree account or log in.
-3. When you see the **Clone New** dialog in SourceTree, update the destination path and name if you’d like to and then click **Clone**.
-4. Open the directory you just created to see your repository’s files.
+---
 
-Now that you're more familiar with your Bitbucket repository, go ahead and add a new file locally. You can [push your change back to Bitbucket with SourceTree](https://confluence.atlassian.com/x/iqyBMg), or you can [add, commit,](https://confluence.atlassian.com/x/8QhODQ) and [push from the command line](https://confluence.atlassian.com/x/NQ0zDQ).
+## 🗂️ Project Structure
+
+- `app/` – app logic: views, models, ViewModels
+- `network/` – Retrofit config, Finnhub API integration
+- `database/` – Room local database logic
+- `backend/` – Parse SDK and Back4App integration
+- `ui/` – user interface layout (XML)
+
+---
+
+## 🔄 Data Sync & Security
+
+- User data is stored in the cloud using Parse Objects.
+- Access controlled via ACL (Access Control List) – positions are private to their owners.
+- Application logic manages user sessions, password, and email validation.
+
+---
+
+## ▼ Requirements
+
+- Android 9.0 (API 28) or newer
+- Back4App user account
+- Finnhub API key
+
+---
+
+## ⚙️ Running Project Locally
+
+1. Clone the repository:
+git clone https://github.com/your-username/StockTracker.git
+2. Open the project in Android Studio.
+3. Add your API keys to `local.properties` or config:
+FINNHUB_API_KEY=your_key
+PARSE_APP_ID=your_app_id
+PARSE_CLIENT_KEY=your_client_key
+PARSE_SERVER_URL=https://parseapi.back4app.com/
+4. Run the app on an emulator or Android device.
+
+---
+
+## 🚀 Future Development
+
+- Support for more exchanges (GPW, LSE, DAX)
+- Other asset types (forex, cryptocurrencies)
+- Multi-currency support, static positions (cash, bonds)
+- Candle charts and historical portfolio value analytics
+- Web and iOS client apps
+
+---
+
+## 🧪 Testing
+
+- Tested on Emulator: Pixel 2 (Android 9.0)
+- Physical Device: Motorola Moto G7 (Android 10)
+
+Test cases included:
+- Adding and syncing positions
+- Offline mode reliability
+- Handling registration/login errors
+
+---
+
+## 📄 License
+
+This is an educational, non-commercial project created as part of an engineering thesis.
